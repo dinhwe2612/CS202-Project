@@ -1,0 +1,3 @@
+TYPE OBJECT3D
+NAME crate_bun
+COLLISION -9 0.7 2 1.8

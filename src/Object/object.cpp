@@ -9,8 +9,48 @@ Object::~Object() {
     
 }
 
-void Object::draw() {
-    
+void Object::setType(std::string string_type) {
+    type = ObjectType::listOfTypes[string_type];
+}
+
+ObjectType::Type Object::getType() const {
+    return type;
+}
+
+void Object::setActivate(bool activate) {
+    this->activate = activate;
+}
+
+void Object::setHovered(bool hovered) {
+    this->hovered = hovered;
+}
+
+void Object::setPressed(bool pressed) {
+    this->pressed = pressed;
+}
+
+bool Object::isActivate() const {
+    return activate;
+}
+
+bool Object::isHovered() const {
+    return hovered;
+}
+
+bool Object::isPressed() const {
+    return pressed;
+}
+
+void Object::setMediator(IMediator *mediator) {
+    this->mediator = mediator;
+}
+
+void Object::setName(std::string name) {
+    this->name = name;
+}
+
+std::string Object::getName() const {
+    return name;
 }
 
 /////////////////////////////////
@@ -39,12 +79,16 @@ Object3D::Object3D() {
     
 }
 
+Object3D::Object3D(const std::string path) {
+    setModel(path);
+}
+
 Object3D::~Object3D() {
     
 }
 
 void Object3D::draw() {
-    
+    if (isModelLoaded()) DrawModel(model, position, scale, color);
 }
 
 void Object3D::rotate(Vector3 axis, float angle) {
@@ -73,6 +117,8 @@ void Object3D::rotate(const Axis axis, float angle) {
 
 void Object3D::move(const Vector3 offset) {
     position = Vector3Add(position, offset);
+    collisionBox.x += offset.x;
+    collisionBox.y += offset.z;
 }
 
 Vector3 Object3D::getPosition() const {
@@ -85,22 +131,58 @@ void Object3D::setPosition(const Vector3 &position) {
 
 void Object3D::setModel(const Model &model) {
     this->model = model;
+    modelLoaded = true;
 }
 
 void Object3D::setModel(const std::string path) {
     model = LoadModel(path.c_str());
 
     anim = LoadModelAnimations(path.c_str(), &animMaxFrame);
-}
-
-void Object3D::setMediator(Mediator *mediator) {
-    this->mediator = mediator;
+    std::cout << animMaxFrame << std::endl;
+    modelLoaded = true;
 }
 
 void Object3D::setScale(float scale) {
     this->scale = scale;
 }
 
-void Object3D::setCurrentDirection(int curDirection) {
+float Object3D::getScale() const {
+    return scale;
+}
+
+void Object3D::setCurrentDirection(Direction curDirection) {
     this->curDirection = curDirection;
+}
+
+void Object3D::setColor(Color color) {
+    this->color = color;
+}
+
+void Object3D::incScale(float add) {
+    scale += add;
+}
+
+Model Object3D::getModel() const {
+    return model;
+}
+
+void Object3D::setCollisionable(Rectangle collisionBox) {
+    this->collisionBox = collisionBox;
+    collisionable = true;
+}
+
+Rectangle Object3D::getCollisionBox() const {
+    return collisionBox;
+}
+
+bool Object3D::isCollisionable() const {
+    return collisionable;
+}
+
+bool Object3D::isModelLoaded() const {
+    return modelLoaded;
+}
+
+Direction Object3D::getCurDirection() const {
+    return curDirection;
 }

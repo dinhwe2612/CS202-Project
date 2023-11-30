@@ -1,17 +1,18 @@
 cmake_minimum_required(VERSION 3.14)
+set (CMAKE_CXX_FLAGS "-lstdc++fs -std=c++17")
 project(raylib_cpp_example)
 
 # raylib
 find_package(raylib QUIET)
 if (NOT raylib_FOUND)
-    include(FetchContent)
-    FetchContent_Declare(
-        raylib
-        GIT_REPOSITORY https://github.com/raysan5/raylib.git
-        GIT_TAG 4.5.0
+include(FetchContent)
+FetchContent_Declare(
+    raylib
+    GIT_REPOSITORY https://github.com/raysan5/raylib.git
+    GIT_TAG 4.5.0
     )
     FetchContent_MakeAvailable(raylib)
-endif()
+    endif()
 
 # raylib-cpp
 find_package(raylib_cpp QUIET)
@@ -30,14 +31,17 @@ endif()
 file(GLOB SOURCES 
     src/*.cpp 
     src/Object/*.cpp
+    src/Object/Movable/*.cpp
     src/Map/*.cpp
     src/Application/*.cpp
-    src/Scence/*.cpp
+    src/Scene/*.cpp
     src/Mediator/*.cpp
+    src/Other/*.cpp
 )
 
 include_directories(src)
 include_directories(src/Object)
+include_directories(src/Object/Movable)
 include_directories(src/Map)
 include_directories(src/Application)
 include_directories(src/Scene)

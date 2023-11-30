@@ -1,0 +1,4 @@
+TYPE OBJECT3D
+NAME ingredient_bun
+MODEL ../resources/gltf/food_ingredient_bun.gltf
+SCALE 1

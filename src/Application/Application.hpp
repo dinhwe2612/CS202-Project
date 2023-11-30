@@ -2,7 +2,7 @@
 #include "raylib-cpp.hpp"
 
 #include "object.hpp"
-#include "../Scence/IScence.hpp"
+#include "../Scene/IScene.hpp"
 
 namespace app {
     class Application {
@@ -11,7 +11,7 @@ namespace app {
         raylib::Camera3D *camera;
         
 
-        IScence *curScence;
+    IScene *curScene;
     public:
         Application(int width, int height, const std::string &title);
         ~Application();

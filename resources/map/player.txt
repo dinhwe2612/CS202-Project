@@ -1,0 +1,8 @@
+TYPE PLAYER
+MODEL ../resources/models/little_chef_overcooked_like.glb
+POSITION 0 1 0
+SPEED 0.009
+SCALE 5
+ROTATE X -90
+COLLISION -0.9 -0.9 1.8 1.8
+ACTIVATE 1

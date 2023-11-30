@@ -1,0 +1,6 @@
+TYPE OBJECT3D
+MODEL ../resources/models/map_basic_ex.glb
+POSITION 0 -1 0
+SCALE 1
+COLLISION -8.5 -6.5 15 15
+ACTIVATE 1
