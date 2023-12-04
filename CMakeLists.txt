@@ -32,6 +32,7 @@ file(GLOB SOURCES
     src/*.cpp 
     src/Object/*.cpp
     src/Object/Movable/*.cpp
+    src/Object/Pickable/*.cpp
     src/Map/*.cpp
     src/Application/*.cpp
     src/Scene/*.cpp
@@ -42,6 +43,7 @@ file(GLOB SOURCES
 include_directories(src)
 include_directories(src/Object)
 include_directories(src/Object/Movable)
+include_directories(src/Object/Pickable)
 include_directories(src/Map)
 include_directories(src/Application)
 include_directories(src/Scene)

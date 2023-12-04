@@ -10,40 +10,44 @@ Player::~Player() {
 
 void Player::draw() {
     DrawModel(getModel(), getPosition(), getScale(), WHITE);
-    if (getHoldingObjectType() != HoldingObjectType::NONE) {
-        holdingObject3D->draw();
-    }
-}
-
-HoldingObjectType Player::getHoldingObjectType() const {
-    return holdingObjectType;
-}
-
-bool Player::pickUpObject(std::string name) {
-    if (holdingObjectType != HoldingObjectType::NONE) return false;
-    if (name.substr(0, 9) != "ingredient") {
-        InputObject::input("../resources/Object/ingredient_" + name + ".txt", holdingObject3D);
-        holdingObjectType = HoldingObjectType::INGREDIENT;
-    }
-    std::cout << name << std::endl;
-}
-
-bool Player::dropObject() {
-
+    if (isPicking()) pickableObject->draw(pointInteract());
 }
 
 Vector2 Player::pointInteract() const {
     Rectangle area = getCollisionBox();
     float middle_x = area.x + area.width / 2;
     float middle_y = area.y + area.height / 2;
+    float distance = 0.5;
     switch (getCurDirection()) {
     case Direction::UP:
-        return { middle_x, area.y - 1 };
+        return { middle_x, area.y - distance };
     case Direction::DOWN:
-        return { middle_x, area.y + area.height + 1 };
+        return { middle_x, area.y + area.height + distance };
     case Direction::LEFT:
-        return { area.x - 1, middle_y };
+        return { area.x - distance, middle_y };
     case Direction::RIGHT:
-        return { area.x + area.width + 1, middle_y };
+        return { area.x + area.width + distance, middle_y };
     }
+}
+
+bool Player::isPicking() {
+    if (pickableObject) return true;
+    return false;
+}
+
+bool Player::pickUpObject(std::string name) {
+    if (pickableObject) return false;
+    Object3D *object;
+    InputObject::input(ingredient.at(name), object);
+    pickableObject = dynamic_cast<PickableObject *>(object);
+    return true;
+}
+
+bool Player::dropObject() {
+    if (pickableObject) {
+        delete pickableObject;
+        pickableObject = nullptr;
+        return true;
+    }
+    return false;
 }

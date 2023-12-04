@@ -1,7 +1,7 @@
 #include "InputObject.hpp"
 
 namespace InputObject {
-    void input(std::string path, Object *&object) {
+    void input(std::string path, Object3D *&object) {
         std::ifstream fin;
         fin.open(path);
             std::string inst;
@@ -38,12 +38,13 @@ namespace InputObject {
                     object3d->setActivate(activate);
                 } else if (inst == "TYPE") {
                     std::string type; fin >> type;
-                    std::cout << type << std::endl;
                     if (type == "PLAYER") {
                         object = new Player();
                     } else if (type == "OBJECT3D") {
                         object = new Object3D();
                         std::cout << "3d" << std::endl;
+                    } else if (type == "PICKABLEOBJECT") {
+                        object = new PickableObject();
                     }
                 } else if (inst == "ROTATE") {
                     Object3D *object3d = dynamic_cast<Object3D *>(object);
@@ -62,7 +63,6 @@ namespace InputObject {
                     object->setName(name);
                 }
             }
-            std::cout << "finish" << '\n';
             fin.close();
     }
     void input(std::string pathToDirectory, std::vector<std::shared_ptr<Object>> &objects) {
@@ -73,9 +73,8 @@ namespace InputObject {
         dirent *entry;
         int cnt = 0;
         while((entry = readdir(dir)) != NULL) {
-            std::cout << (++cnt) << ' ' << entry->d_name << std::endl;
             if (entry->d_name[0] == '.') {
-                std::cout << "continue" << std::endl;
+                continue;
             } else {
                 fin.open(pathToDirectory + "/" + entry->d_name);
                 std::string inst;
@@ -136,7 +135,6 @@ namespace InputObject {
                     }
                 }
                 fin.close();
-                std::cout << objects.back()->isActivate() << std::endl;
             }
         }
     }

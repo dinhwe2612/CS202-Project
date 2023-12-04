@@ -15,6 +15,7 @@ public:
 class ObjectMediator : public IMediator {
 private:
     std::vector<std::shared_ptr<Object>> objects;
+    void E_Pressed();
 public:
     ObjectMediator(std::vector<std::shared_ptr<Object>> &objects);
     void notify(std::vector<std::string> messages) override;

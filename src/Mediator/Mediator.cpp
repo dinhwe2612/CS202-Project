@@ -6,18 +6,31 @@ ObjectMediator::ObjectMediator(std::vector<std::shared_ptr<Object>> &objects) {
     }
 }
 
-void ObjectMediator::notify(std::vector<std::string> messages) {
-    if (messages[0] == "E_Pressed") {
-        Player *player = dynamic_cast<Player *>(objects.back().get());
+void ObjectMediator::E_Pressed() {
+    Player *player = dynamic_cast<Player *>(objects.back().get());
         for(auto &object : objects) {
-            if (object->getName().substr(0, 5) == "crate") {
+            std::string nameObject = object->getName();
+            if (nameObject.size() > 5 && nameObject.substr(0, 5) == "crate") {
                 Object3D *object3d = dynamic_cast<Object3D *>(object.get());
                 if (CheckCollisionPointRec(player->pointInteract(), object3d->getCollisionBox())) {
-                    if (player->pickUpObject(object3d->getName().substr(6, (int)object3d->getName().size() - 6))) {
-                        
+                    if (player->pickUpObject(nameObject.substr(6, (int)nameObject.size() - 1))) {
+                        break;
+                    }
+                }
+            }
+            if (nameObject == "trash") {
+                Object3D *object3d = dynamic_cast<Object3D *>(object.get());
+                if (CheckCollisionPointRec(player->pointInteract(), object3d->getCollisionBox())) {
+                    if (player->dropObject()) {
+                        break;
                     }
                 }
             }
         }
+}
+
+void ObjectMediator::notify(std::vector<std::string> messages) {
+    if (messages[0] == "E_Pressed") {
+        E_Pressed();
     }
 }

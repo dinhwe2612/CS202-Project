@@ -1,0 +1,5 @@
+TYPE PICKABLEOBJECT
+NAME ingredient_tomato
+MODEL ../resources/gltf/food_ingredient_tomato.gltf
+SCALE 1
+POSITION 0 0.6 0

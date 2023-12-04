@@ -9,6 +9,9 @@ SceneGame::SceneGame() {
     camera.projection = CAMERA_PERSPECTIVE;
 
     InputObject::input("../resources/map", objects);
+    for(auto &object : objects) {
+        object->setMediator(objectMediator);
+    }
     // Set input functions
     Player *player = dynamic_cast<Player *>(objects.back().get());
     std::vector<InputSupport::Key> controllerPlayer = {InputSupport::UP, InputSupport::DOWN, InputSupport::LEFT, InputSupport::RIGHT};

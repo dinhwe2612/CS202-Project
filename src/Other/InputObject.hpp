@@ -2,8 +2,9 @@
 
 #include "raylib-cpp.hpp"
 
-#include <Object/object.hpp>
+#include "../Object/Object.hpp"
 #include "../Object/Movable/MovableObject.hpp"
+#include "../Object/Pickable/PickableObject.hpp"
 #include "../Object/Movable/Player.hpp"
 
 #include <vector>
@@ -23,7 +24,7 @@ namespace InputObject {
         ACTIVATE,
         TYPE
     };
-    void input(std::string path, Object *&object);
+    void input(std::string path, Object3D *&object);
     void input(std::string pathToDirectory, std::vector<std::shared_ptr<Object>> &objects);
     
 }

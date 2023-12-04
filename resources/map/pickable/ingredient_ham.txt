@@ -1,0 +1,5 @@
+TYPE PICKABLEOBJECT
+NAME ingredient_ham
+MODEL ../resources/gltf/food_ingredient_ham.gltf
+SCALE 1
+POSITION 0 0.6 0

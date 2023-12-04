@@ -1,4 +1,5 @@
-TYPE OBJECT3D
+TYPE PICKABLEOBJECT
 NAME ingredient_bun
 MODEL ../resources/gltf/food_ingredient_bun.gltf
 SCALE 1
+POSITION 0 0.6 0
