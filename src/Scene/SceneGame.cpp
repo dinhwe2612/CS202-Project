@@ -28,7 +28,13 @@ SceneGame::SceneGame() {
     }
     objectMediator = new ObjectMediator(objects);
     setInputFunction(InputSupport::E, [this]() {
-        objectMediator->notify({"E_Pressed"});
+        objectMediator->notify({"pick"});
+    });
+    setInputFunction(InputSupport::Q, [this]() {
+        objectMediator->notify({"drop"});
+    });
+    setInputFunction(InputSupport::SPACE, [this]() {
+        objectMediator->notify({"cut_cook"});
     });
 }
 
@@ -44,13 +50,13 @@ void SceneGame::draw() {
         for (auto &object : objects) {
             ++cnt;
             if (object->isActivate()) object->draw();
-            // if (object->getType() == ObjectType::Type::OBJECT3D) {
-            //     Object3D *object3d = dynamic_cast<Object3D*>(object.get());
-            //     if (object3d->isCollisionable() && !object3d->isActivate()) {
-            //         Rectangle rec = object3d->getCollisionBox();
-            //         DrawCube((Vector3){ rec.x + rec.width/2, 1, rec.y + rec.height/2 }, rec.width, 2, rec.height, { 255, 0, 0, 100 });
-            //     } 
-            // }
+            if (object->getType() == ObjectType::Type::OBJECT3D || object->getType() == ObjectType::CONTAINER) {
+                Object3D *object3d = dynamic_cast<Object3D*>(object.get());
+                if (object3d->isCollisionable() && !object3d->isActivate()) {
+                    Rectangle rec = object3d->getCollisionBox();
+                    DrawCube((Vector3){ rec.x + rec.width/2, 1, rec.y + rec.height/2 }, rec.width, 2, rec.height, { 255, 0, 0, 100 });
+                } 
+            }
         }
     EndMode3D();
 }

@@ -115,6 +115,8 @@ namespace InputObject {
                             objects.push_back(std::make_shared<Player>());
                         } else if (type == "OBJECT3D") {
                             objects.push_back(std::make_shared<Object3D>());
+                        } else if (type == "CONTAINER") {
+                            objects.push_back(std::make_shared<Container>());
                         }
                         objects.back()->setType(type);
                     } else if (inst == "ROTATE") {

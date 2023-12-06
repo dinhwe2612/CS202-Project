@@ -1,7 +1,7 @@
 #pragma once
 
 #include "MovableObject.hpp"
-#include <object.hpp>
+#include "../Object.hpp"
 #include "../Other/InputObject.hpp"
 #include "../Object/Pickable/PickableObject.hpp"
 
@@ -10,9 +10,8 @@
 
 // Player class for loading, drawing, and updating the player
 class Player : public MovableObject {
-private:
-    PickableObject *pickableObject = nullptr;
 public:
+    PickableObject *pickableObject = nullptr;
     Player();
     ~Player();
     void draw() override;

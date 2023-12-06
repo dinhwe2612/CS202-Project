@@ -1,12 +1,10 @@
 #pragma once
 
-#include <raylib-cpp.hpp>
-
-#include <Object/object.hpp>
+#include "../Object/Object.hpp"
 
 #include <unordered_map>
 
-static std::unordered_map<std::string, std::string> ingredient = {
+static std::unordered_map<std::string, std::string> pickables = {
     {"bun", "../resources/map/pickable/ingredient_bun.txt"},
     {"cheese", "../resources/map/pickable/ingredient_cheese.txt"},
     {"lettuce", "../resources/map/pickable/ingredient_lettuce.txt"},

@@ -38,7 +38,7 @@ bool Player::isPicking() {
 bool Player::pickUpObject(std::string name) {
     if (pickableObject) return false;
     Object3D *object;
-    InputObject::input(ingredient.at(name), object);
+    InputObject::input(pickables.at(name), object);
     pickableObject = dynamic_cast<PickableObject *>(object);
     return true;
 }

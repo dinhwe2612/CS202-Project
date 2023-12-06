@@ -8,14 +8,16 @@ namespace ObjectType {
         INPUTBOX,
         PLAYER,
         OBJECT3D,
-        PICKABLEOBJECT
+        PICKABLEOBJECT,
+        CONTAINER,
     }; 
     static std::map<std::string, Type> listOfTypes = {
         {"BUTTON", BUTTON},
         {"INPUTBOX", INPUTBOX},
         {"PLAYER", PLAYER},
         {"OBJECT3D", OBJECT3D},
-        {"PICKABLEOBJECT", PICKABLEOBJECT}
+        {"PICKABLEOBJECT", PICKABLEOBJECT},
+        {"CONTAINER", CONTAINER},
     };
 }
 

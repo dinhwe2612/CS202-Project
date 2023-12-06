@@ -5,6 +5,7 @@
 #include "../Object/Object.hpp"
 #include "../Object/Movable/MovableObject.hpp"
 #include "../Object/Pickable/PickableObject.hpp"
+#include "../Object/Container/Container.hpp"
 #include "../Object/Movable/Player.hpp"
 
 #include <vector>

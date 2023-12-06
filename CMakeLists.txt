@@ -33,6 +33,7 @@ file(GLOB SOURCES
     src/Object/*.cpp
     src/Object/Movable/*.cpp
     src/Object/Pickable/*.cpp
+    src/Object/Container/*.cpp
     src/Map/*.cpp
     src/Application/*.cpp
     src/Scene/*.cpp
