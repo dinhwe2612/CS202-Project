@@ -14,10 +14,10 @@ SceneGame::SceneGame() {
     }
     // Set input functions
     Player *player = dynamic_cast<Player *>(objects.back().get());
-    std::vector<InputSupport::Key> controllerPlayer = {InputSupport::UP, InputSupport::DOWN, InputSupport::LEFT, InputSupport::RIGHT};
+    std::vector<InputSupport::Key> controllerPlayer = {InputSupport::UP_ARROW, InputSupport::DOWN_ARROW, InputSupport::LEFT_ARROW, InputSupport::RIGHT_ARROW};
     std::vector<Direction> directions = {Direction::UP, Direction::DOWN, Direction::LEFT, Direction::RIGHT};
     for(int i = 0; i < controllerPlayer.size(); ++i) {
-        setInputFunction(controllerPlayer[i], [this, player, i, directions](){ 
+        setInputFunction(controllerPlayer[i], InputSupport::DOWN, [this, player, i, directions](){ 
             if (player->isColliding(directions[i], objects) == false) {
                 player->moveDirection(directions[i]); 
             } else {
@@ -27,13 +27,13 @@ SceneGame::SceneGame() {
         });
     }
     objectMediator = new ObjectMediator(objects);
-    setInputFunction(InputSupport::E, [this]() {
+    setInputFunction(InputSupport::E, InputSupport::PRESSED, [this]() {
         objectMediator->notify({"pick"});
     });
-    setInputFunction(InputSupport::Q, [this]() {
+    setInputFunction(InputSupport::Q, InputSupport::PRESSED, [this]() {
         objectMediator->notify({"drop"});
     });
-    setInputFunction(InputSupport::SPACE, [this]() {
+    setInputFunction(InputSupport::SPACE, InputSupport::PRESSED, [this]() {
         objectMediator->notify({"cut_cook"});
     });
 }
@@ -46,9 +46,7 @@ void SceneGame::draw() {
     triggerInputActions();
     Rectangle rec = { -9, 0, 2, 2 };
     BeginMode3D(camera);
-        int cnt = 0;
         for (auto &object : objects) {
-            ++cnt;
             if (object->isActivate()) object->draw();
             if (object->getType() == ObjectType::Type::OBJECT3D || object->getType() == ObjectType::CONTAINER) {
                 Object3D *object3d = dynamic_cast<Object3D*>(object.get());

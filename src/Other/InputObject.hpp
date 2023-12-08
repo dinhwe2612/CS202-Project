@@ -7,6 +7,9 @@
 #include "../Object/Pickable/PickableObject.hpp"
 #include "../Object/Container/Container.hpp"
 #include "../Object/Movable/Player.hpp"
+#include "../Object/Container/CuttingBoard.hpp"
+#include "../ResourcesManager/ResourcesManager.hpp"
+#include "../Object/Container/FoodCooker.hpp"
 
 #include <vector>
 #include <string>

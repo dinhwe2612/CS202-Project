@@ -39,6 +39,7 @@ file(GLOB SOURCES
     src/Scene/*.cpp
     src/Mediator/*.cpp
     src/Other/*.cpp
+    src/ResourcesManager/*.cpp
 )
 
 include_directories(src)
@@ -49,6 +50,7 @@ include_directories(src/Map)
 include_directories(src/Application)
 include_directories(src/Scene)
 include_directories(src/Mediator)
+include_directories(src/ResourcesManager)
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 11)

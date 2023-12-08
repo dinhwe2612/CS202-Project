@@ -6,6 +6,7 @@
 #include "../Other/AdjustObject.hpp"
 #include "../Other/InputObject.hpp"
 #include "../Mediator/Mediator.hpp"
+#include "../ResourcesManager/ResourcesManager.hpp"
 
 #include <vector>
 

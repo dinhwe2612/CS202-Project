@@ -1,7 +1,7 @@
 #include "Player.hpp"
 
-Player::Player() {
-    
+Player::Player() : MovableObject() {
+    setModel(resourcesManager->getModel("player"));
 }
 
 Player::~Player() {
@@ -9,7 +9,7 @@ Player::~Player() {
 }
 
 void Player::draw() {
-    DrawModel(getModel(), getPosition(), getScale(), WHITE);
+    MovableObject::draw();
     if (isPicking()) pickableObject->draw(pointInteract());
 }
 
@@ -37,9 +37,7 @@ bool Player::isPicking() {
 
 bool Player::pickUpObject(std::string name) {
     if (pickableObject) return false;
-    Object3D *object;
-    InputObject::input(pickables.at(name), object);
-    pickableObject = dynamic_cast<PickableObject *>(object);
+    pickableObject = new PickableObject(name);
     return true;
 }
 

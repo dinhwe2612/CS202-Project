@@ -1,4 +1,4 @@
 TYPE PICKABLEOBJECT
-NAME carrot
+NAME lettuce_slice
 SCALE 1
 POSITION 0 0.6 0

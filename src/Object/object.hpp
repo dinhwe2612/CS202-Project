@@ -1,5 +1,6 @@
 #pragma once
 #include "raylib-cpp.hpp"
+#include "../ResourcesManager/ResourcesManager.hpp"
 
 #include <map>
 namespace ObjectType {
@@ -10,6 +11,9 @@ namespace ObjectType {
         OBJECT3D,
         PICKABLEOBJECT,
         CONTAINER,
+        CUTTINGBOARD,
+        GASSTOVE,
+        FOODCOOKER,
     }; 
     static std::map<std::string, Type> listOfTypes = {
         {"BUTTON", BUTTON},
@@ -18,6 +22,9 @@ namespace ObjectType {
         {"OBJECT3D", OBJECT3D},
         {"PICKABLEOBJECT", PICKABLEOBJECT},
         {"CONTAINER", CONTAINER},
+        {"CUTTINGBOARD", CUTTINGBOARD},
+        {"GASSTOVE", GASSTOVE},
+        {"FOODCOOKER", FOODCOOKER},
     };
 }
 
@@ -27,6 +34,7 @@ class Object {
 protected:
     std::string name;
     IMediator *mediator = nullptr;
+    ResourcesManager *resourcesManager;
 private:
     bool activate = false;
     bool hovered = false;

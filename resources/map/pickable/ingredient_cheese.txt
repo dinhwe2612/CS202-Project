@@ -1,5 +1,4 @@
 TYPE PICKABLEOBJECT
-NAME ingredient_cheese
-MODEL ../resources/gltf/food_ingredient_cheese.gltf
+NAME cheese
 SCALE 1
 POSITION 0 0.6 0

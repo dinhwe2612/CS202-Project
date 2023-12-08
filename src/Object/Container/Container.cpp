@@ -1,6 +1,6 @@
 #include "Container.hpp"
 
-Container::Container() {
+Container::Container() :Object3D() {
     
 }
 
@@ -10,7 +10,7 @@ Container::~Container() {
 
 bool Container::placeObjectOn(PickableObject *object) {
     placeObject = true;
-    setModel(object->getModel());
+    if (object->isModelLoaded()) setModel(object->getModel());
     setScale(object->getScale());
     setName(object->getName());
     setPosition(object->getPosition());
@@ -19,7 +19,6 @@ bool Container::placeObjectOn(PickableObject *object) {
 
 bool Container::removeObject() {
     placeObject = false;
-    UnloadModel(model);
     return true;
 }
 
@@ -32,6 +31,8 @@ void Container::draw() {
         Rectangle area = getCollisionBox();
         float x = area.x + area.width / 2;
         float y = area.y + area.height / 2;
-        DrawModel(model, { x, getPosition().y, y }, getScale(), WHITE);
+        if (resourcesManager->hasModel(name)) {
+            DrawModel(resourcesManager->getModel(name), { x, getPosition().y, y }, getScale(), WHITE);
+        }
     }
 }

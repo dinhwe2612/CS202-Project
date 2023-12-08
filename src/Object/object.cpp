@@ -2,7 +2,7 @@
 #include <iostream>
 
 Object::Object() {
-    
+    resourcesManager = ResourcesManager::getInstance();
 }
 
 Object::~Object() {
@@ -75,7 +75,7 @@ void Object2D::setPosition(const Vector2 &position) {
 }
 
 /////////////////////////////////
-Object3D::Object3D() {
+Object3D::Object3D() : Object() {
     
 }
 
@@ -89,6 +89,12 @@ Object3D::~Object3D() {
 
 void Object3D::draw() {
     if (isModelLoaded()) DrawModel(model, position, scale, color);
+    else {
+        ResourcesManager* resourcesManager = ResourcesManager::getInstance();
+        if (resourcesManager->hasModel(name)) {
+            DrawModel(resourcesManager->getModel(name), position, scale, color);
+        }
+    }
 }
 
 void Object3D::rotate(Vector3 axis, float angle) {
@@ -138,7 +144,6 @@ void Object3D::setModel(const std::string path) {
     model = LoadModel(path.c_str());
 
     anim = LoadModelAnimations(path.c_str(), &animMaxFrame);
-    std::cout << animMaxFrame << std::endl;
     modelLoaded = true;
 }
 

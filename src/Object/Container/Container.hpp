@@ -14,5 +14,5 @@ public:
     virtual bool placeObjectOn(PickableObject *object);
     virtual bool removeObject();
     bool isPlaceObjectOn();
-    void draw() override;
+    virtual void draw() override;
 };

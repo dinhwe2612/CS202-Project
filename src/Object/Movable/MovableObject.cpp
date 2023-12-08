@@ -1,5 +1,9 @@
 #include "MovableObject.hpp"
 
+MovableObject::MovableObject() : Object3D() {
+    
+}
+
 void MovableObject::setSpeed(float speed) {
     this->speed = speed;
 }

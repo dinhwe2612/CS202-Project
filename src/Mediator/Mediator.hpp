@@ -3,6 +3,9 @@
 
 #include "../Object/object.hpp"
 #include "../Object/Movable/Player.hpp"
+#include "../Object/Container/Container.hpp"
+#include "../Object/Container/CuttingBoard.hpp"
+#include "../Object/Container/FoodCooker.hpp"
 
 
 // Mediator interface

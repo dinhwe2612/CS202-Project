@@ -9,40 +9,55 @@ AScene::~AScene() {
 }
 
 void AScene::triggerInputActions() {
-    std::unordered_map<int,std::vector<std::function<void()>>>::iterator itKey;
+    std::unordered_map<std::pair<int,int>,std::function<void()>>::iterator itKey;
 
-    for(auto const &key : inputSp.getKeysDown()) {
-        itKey = listOfkeys.find(key);
+    for(auto const &key : inputSp.getKeysPressed()) {
+        itKey = listOfkeys.find({ key, InputSupport::PRESSED });
         if (itKey != listOfkeys.end()) {
-            for (auto const &func : itKey->second) {
-                func();
-            }
+            itKey->second();
         }
     }
 
-    if (inputSp.isMouseDown()) {
-        itKey = listOfkeys.find(InputSupport::PRESSED);
+    for(auto const &key : inputSp.getKeysDown()) {
+        itKey = listOfkeys.find({ key, InputSupport::DOWN });
         if (itKey != listOfkeys.end()) {
-            for (auto const &func : itKey->second) {
-                func();
-            }
+            itKey->second();
+        }
+    }
+
+    for(auto const &key : inputSp.getKeysReleased()) {
+        itKey = listOfkeys.find({ key, InputSupport::RELEASED });
+        if (itKey != listOfkeys.end()) {
+            itKey->second();
+        }
+    }
+
+
+    if (inputSp.isMousePressed()) {
+        itKey = listOfkeys.find({ InputSupport::MOUSE_LEFT, InputSupport::PRESSED });
+        if (itKey != listOfkeys.end()) {
+            itKey->second();
+        }
+    }
+    if (inputSp.isMouseDown()) {
+        itKey = listOfkeys.find({ InputSupport::MOUSE_LEFT, InputSupport::DOWN });
+        if (itKey != listOfkeys.end()) {
+            itKey->second();
         }
     }
     if (inputSp.isMouseReleased()) {
-        itKey = listOfkeys.find(InputSupport::RELEASED);
+        itKey = listOfkeys.find({ InputSupport::MOUSE_LEFT, InputSupport::RELEASED });
         if (itKey != listOfkeys.end()) {
-            for (auto const &func : itKey->second) {
-                func();
-            }
+            itKey->second();
         }
     }
 }
 
-void AScene::setInputFunction(InputSupport::Key key, std::function<void()> func) {
-    std::unordered_map<int,std::vector<std::function<void()>>>::iterator itKey;
+void AScene::setInputFunction(InputSupport::Key key, InputSupport::InputType type, std::function<void()> func) {
+    std::unordered_map<std::pair<int,int>,std::function<void()>>::iterator itKey;
 
-    itKey = listOfkeys.find(key);
+    itKey = listOfkeys.find({ key, type });
     if (itKey != listOfkeys.end()) {
-        itKey->second.push_back(func);
+        itKey->second = func;
     }
 }

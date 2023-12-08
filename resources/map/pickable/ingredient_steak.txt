@@ -1,5 +1,4 @@
 TYPE PICKABLEOBJECT
-NAME ingredient_steak
-MODEL ../resources/gltf/food_ingredient_steak.gltf
+NAME steak
 SCALE 1
 POSITION 0 0.6 0

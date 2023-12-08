@@ -1,5 +1,4 @@
 TYPE PICKABLEOBJECT
 NAME plate_small
-MODEL ../resources/gltf/plate_small.gltf
 SCALE 1.3
 POSITION 0 0.6 0

@@ -6,12 +6,7 @@ namespace InputObject {
         fin.open(path);
             std::string inst;
             while(fin >> inst) {
-                if (inst == "MODEL") {
-                    Object3D *object3d = dynamic_cast<Object3D *>(object);
-                    std::string pathToModel;
-                    fin >> pathToModel;
-                    object3d->setModel(pathToModel);
-                } else if (inst == "POSITION") {
+                if (inst == "POSITION") {
                     Object3D *object3d = dynamic_cast<Object3D *>(object);
                     float x, y, z;
                     fin >> x >> y >> z;
@@ -42,7 +37,6 @@ namespace InputObject {
                         object = new Player();
                     } else if (type == "OBJECT3D") {
                         object = new Object3D();
-                        std::cout << "3d" << std::endl;
                     } else if (type == "PICKABLEOBJECT") {
                         object = new PickableObject();
                     }
@@ -79,12 +73,7 @@ namespace InputObject {
                 fin.open(pathToDirectory + "/" + entry->d_name);
                 std::string inst;
                 while(fin >> inst) {
-                    if (inst == "MODEL") {
-                        Object3D *object = dynamic_cast<Object3D *>(objects.back().get());
-                        std::string pathToModel;
-                        fin >> pathToModel;
-                        object->setModel(pathToModel);
-                    } else if (inst == "POSITION") {
+                    if (inst == "POSITION") {
                         Object3D *object = dynamic_cast<Object3D *>(objects.back().get());
                         float x, y, z;
                         fin >> x >> y >> z;
@@ -117,6 +106,10 @@ namespace InputObject {
                             objects.push_back(std::make_shared<Object3D>());
                         } else if (type == "CONTAINER") {
                             objects.push_back(std::make_shared<Container>());
+                        } else if (type == "CUTTINGBOARD") {
+                            objects.push_back(std::make_shared<CuttingBoard>());
+                        } else if (type == "FOODCOOKER") {
+                            objects.push_back(std::make_shared<FoodCooker>());
                         }
                         objects.back()->setType(type);
                     } else if (inst == "ROTATE") {

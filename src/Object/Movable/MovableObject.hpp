@@ -9,8 +9,9 @@
 
 class MovableObject : public Object3D {
 private: 
-    float speed;
+    float speed = 0.0f;
 public:
+    MovableObject();
     void setSpeed(float speed);
     float getSpeed() const;
     void moveDirection(Direction direction);

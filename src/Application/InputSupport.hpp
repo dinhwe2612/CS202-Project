@@ -46,10 +46,10 @@ public:
         SPACE,
         ESCAPE,
         TAB,
-        UP,
-        DOWN,
-        RIGHT,
-        LEFT,
+        UP_ARROW,
+        DOWN_ARROW,
+        RIGHT_ARROW,
+        LEFT_ARROW,
         Q,
         W,
         E,
@@ -76,13 +76,19 @@ public:
         V,
         B,
         N,
+        MOUSE_LEFT,
+    };
+    enum InputType {
         PRESSED,
-        RELEASED,
+        DOWN,
+        RELEASED
     };
     InputSupport();
     ~InputSupport();
-    std::vector<int> getKeyPressed();
+    std::vector<int> getKeysPressed();
     std::vector<int> getKeysDown();
+    std::vector<int> getKeysReleased();
     bool isMouseDown();
     bool isMouseReleased();
+    bool isMousePressed();
 };

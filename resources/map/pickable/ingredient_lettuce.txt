@@ -1,5 +1,4 @@
 TYPE PICKABLEOBJECT
-NAME ingredient_lettuce
-MODEL ../resources/gltf/food_ingredient_lettuce.gltf
+NAME lettuce
 SCALE 1
 POSITION 0 0.6 0
