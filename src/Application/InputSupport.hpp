@@ -81,7 +81,8 @@ public:
     enum InputType {
         PRESSED,
         DOWN,
-        RELEASED
+        RELEASED,
+        DEFAULT,
     };
     InputSupport();
     ~InputSupport();

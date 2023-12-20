@@ -25,8 +25,14 @@ void Button::setText(Font _font, std::string _Text, Vector2 _coordText, float _f
 	colorTextClicked = colorClicked;
 }
 
+void Button::setTextCenter(Font _font, std::string _Text, float _fontSize, float _spacing, Color colorDefault, Color colorTouched, Color colorClicked) {
+	Vector2 _szText = MeasureTextEx(_font, _Text.c_str(), _fontSize, _spacing);
+	Vector2 _coordText = { buttonShape.x + buttonShape.width / 2 - _szText.x / 2, buttonShape.y + buttonShape.height / 2 - _szText.y / 2 };
+	setText(_font, _Text, _coordText, _fontSize, _spacing, colorDefault, colorTouched, colorClicked);
+}
+
 void Button::draw(int &mouseCursor) {
-	int state = getState();
+	// int state = getState();
 	Rectangle currentShape = buttonShape;
 	if (isZoom) {
 		if (state == DEFAULT) {
@@ -87,11 +93,10 @@ void Button::draw() {
 }
 
 int Button::getState() {
-	if (CheckCollisionPointRec(GetMousePosition(), buttonShape)) {
+	if (isTouch()) {
 		if (state == CLICKED && IsMouseButtonReleased(MOUSE_LEFT_BUTTON)) {
 			return state = RELEASED;
-		}
-		else if (IsMouseButtonDown(MOUSE_LEFT_BUTTON)) {
+		} else if (IsMouseButtonDown(MOUSE_LEFT_BUTTON)) {
 			return state = CLICKED;
 		}
 		else {
@@ -99,4 +104,20 @@ int Button::getState() {
 		}
 	}
 	return state = DEFAULT;
+}
+
+void Button::setConer(bool _drawCorner) {
+	drawCorner = _drawCorner;
+}
+
+std::string Button::getText() {
+	return Text;
+}
+
+void Button::setState(BoxState _state) {
+	state = _state;
+}
+
+bool Button::isTouch() {
+	return CheckCollisionPointRec(GetMousePosition(), buttonShape);
 }

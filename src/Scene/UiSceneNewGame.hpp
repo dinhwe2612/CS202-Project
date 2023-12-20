@@ -2,10 +2,10 @@
 
 #include "UiScene.hpp"
 
-class UiSceneMenu : public UiScene {
+class UiSceneNewGame : public UiScene {
 private:
 public:
-    UiSceneMenu();
+    UiSceneNewGame();
     void eventScene() override;
     void draw() override;
 };

@@ -4,6 +4,9 @@
 enum Scenes {
     DEFAULT = -1,
     MENU,
+    SETTING,
+    CREDIT,
+    NEWGAME,
     GAME,
     QUIT
 };

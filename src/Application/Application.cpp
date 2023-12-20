@@ -2,8 +2,8 @@
 
 Application::Application() {
     state = QUIT;
-    curScene = new UiSceneMenu();
     InitWindow(3000, 1800, "Burger Restaurant");
+    curScene = new UiSceneMenu();
 }
 
 Application::~Application() {
@@ -13,6 +13,7 @@ Application::~Application() {
 void Application::run() {
     while (!WindowShouldClose()) {
         state = curScene->run();
-        if (state == QUIT) break;
+        std::cout << "state: " << state << std::endl;
+        if (state != Scenes::DEFAULT) break;
     }
 }

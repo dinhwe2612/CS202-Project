@@ -33,7 +33,7 @@ std::vector<int> InputSupport::getKeysReleased() {
 }
 
 bool InputSupport::isMouseDown() {
-    return IsMouseButtonPressed(MOUSE_LEFT_BUTTON);
+    return IsMouseButtonDown(MOUSE_LEFT_BUTTON);
 }
 
 bool InputSupport::isMouseReleased() {

@@ -40,6 +40,8 @@ SceneGame::~SceneGame() {
 void SceneGame::draw() {
     triggerInputActions();
     objectManager->update();
+    
+    ClearBackground(BLACK);
     BeginDrawing();
     BeginMode3D(camera);
         objectManager->draw();
@@ -49,8 +51,9 @@ void SceneGame::draw() {
 }
 
 Scenes SceneGame::run() {
-    while(!WindowShouldClose()) {
-        ClearBackground(BLACK);
+    while(state == Scenes::DEFAULT) {
+        if (WindowShouldClose())
+            return Scenes::QUIT;
         draw();
     }
     return state;

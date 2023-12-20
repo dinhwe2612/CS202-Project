@@ -39,15 +39,18 @@ void AScene::triggerInputActions() {
         if (itKey != listOfkeys.end()) {
             itKey->second();
         }
-    }
-    if (inputSp.isMouseDown()) {
+    } else if (inputSp.isMouseDown()) {
         itKey = listOfkeys.find({ InputSupport::MOUSE_LEFT, InputSupport::DOWN });
         if (itKey != listOfkeys.end()) {
             itKey->second();
         }
-    }
-    if (inputSp.isMouseReleased()) {
+    } else if (inputSp.isMouseReleased()) {
         itKey = listOfkeys.find({ InputSupport::MOUSE_LEFT, InputSupport::RELEASED });
+        if (itKey != listOfkeys.end()) {
+            itKey->second();
+        }
+    } else {
+        itKey = listOfkeys.find({ InputSupport::MOUSE_LEFT, InputSupport::DEFAULT });
         if (itKey != listOfkeys.end()) {
             itKey->second();
         }

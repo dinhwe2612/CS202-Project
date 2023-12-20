@@ -34,6 +34,8 @@ public:
     void setInputFunction(InputSupport::Key key, InputSupport::InputType type, std::function<void()> func);
 protected:
     std::unordered_map<std::pair<int, int>,std::function<void()>,PairHash> listOfkeys = {
+        {{InputSupport::MOUSE_LEFT, InputSupport::DEFAULT}, {[](){}}},
+
         {{InputSupport::ENTER, InputSupport::PRESSED}, {[](){}}},
         {{InputSupport::SPACE, InputSupport::PRESSED}, {[](){}}},
         {{InputSupport::ESCAPE, InputSupport::PRESSED}, {[](){}}},
@@ -69,6 +71,7 @@ protected:
         {{InputSupport::X, InputSupport::PRESSED}, {[](){}}},
         {{InputSupport::Y, InputSupport::PRESSED}, {[](){}}},
         {{InputSupport::Z, InputSupport::PRESSED}, {[](){}}},
+        {{InputSupport::MOUSE_LEFT, InputSupport::PRESSED}, {[](){}}},
         
         {{InputSupport::ENTER, InputSupport::DOWN}, {[](){}}},
         {{InputSupport::SPACE, InputSupport::DOWN}, {[](){}}},
@@ -105,6 +108,7 @@ protected:
         {{InputSupport::X, InputSupport::DOWN}, {[](){}}},
         {{InputSupport::Y, InputSupport::DOWN}, {[](){}}},
         {{InputSupport::Z, InputSupport::DOWN}, {[](){}}},
+        {{InputSupport::MOUSE_LEFT, InputSupport::DOWN}, {[](){}}},
 
         {{InputSupport::ENTER, InputSupport::RELEASED}, {[](){}}},
         {{InputSupport::SPACE, InputSupport::RELEASED}, {[](){}}},
@@ -141,5 +145,6 @@ protected:
         {{InputSupport::X, InputSupport::RELEASED}, {[](){}}},
         {{InputSupport::Y, InputSupport::RELEASED}, {[](){}}},
         {{InputSupport::Z, InputSupport::RELEASED}, {[](){}}},
+        {{InputSupport::MOUSE_LEFT, InputSupport::RELEASED}, {[](){}}},
     };
 };

@@ -1,7 +1,23 @@
 #include "UiScene.hpp"
 
 UiScene::UiScene() : AScene() {
-    
+    setInputFunction(InputSupport::MOUSE_LEFT, InputSupport::DEFAULT, [this]() {
+        for(auto &button : buttons) {
+            if(button->isTouch()) {
+                button->setState(Button::TOUCHED);
+            } else {
+                button->setState(Button::DEFAULT);
+            }
+        }
+    });
+    setInputFunction(InputSupport::MOUSE_LEFT, InputSupport::DOWN, [this]() {
+        for(auto &button : buttons) {
+            if(button->isTouch()) {
+                button->setState(Button::CLICKED);
+                break;
+            }
+        }
+    });
 }
 
 UiScene::~UiScene() {
@@ -9,14 +25,13 @@ UiScene::~UiScene() {
 }
 
 Scenes UiScene::run() {
-    while(state == Scenes::DEFAULT) {
+    while(state == DEFAULT) {
         BeginDrawing();
         if (WindowShouldClose())
             return Scenes::QUIT;
         triggerInputActions();
-        eventScene();
         draw();
         EndDrawing();
     }
-    return endScene();
+    return state;
 }
