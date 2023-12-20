@@ -15,19 +15,20 @@ int main(void)
     // Initialize Raylib
     InitWindow(3000, 1800, "Cooking");
 
-    SceneGame sceneGame;
+    SceneGame *sceneGame = new SceneGame();
 
 
     // Main game loop
-    while (!WindowShouldClose())
-    {
-        BeginDrawing();
-        ClearBackground({0, 0, 0, 0});
+    Scenes state = GAME;
+    // while (state != Scenes::QUIT)
+    // {
+        // BeginDrawing();
+        // ClearBackground({0, 0, 0, 0});
 
-            sceneGame.draw();
+            state = sceneGame->run();
 
-        EndDrawing();
-    }
+        // EndDrawing();
+    // }
 
     // Unload model and close Raylib
     // UnloadModel(model);

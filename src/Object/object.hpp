@@ -14,6 +14,7 @@ namespace ObjectType {
         CUTTINGBOARD,
         GASSTOVE,
         FOODCOOKER,
+        TASKMANAGER,
     }; 
     static std::map<std::string, Type> listOfTypes = {
         {"BUTTON", BUTTON},
@@ -25,17 +26,16 @@ namespace ObjectType {
         {"CUTTINGBOARD", CUTTINGBOARD},
         {"GASSTOVE", GASSTOVE},
         {"FOODCOOKER", FOODCOOKER},
+        {"TASKMANAGER", TASKMANAGER},
     };
 }
-
-class IMediator;
 
 class Object {
 protected:
     std::string name;
-    IMediator *mediator = nullptr;
     ResourcesManager *resourcesManager;
 private:
+    float scale;
     bool activate = false;
     bool hovered = false;
     bool pressed = false;
@@ -52,9 +52,10 @@ public:
     bool isHovered() const;
     bool isPressed() const;
     ObjectType::Type getType() const;
-    void setMediator(IMediator *mediator);
     void setName(std::string name);
     std::string getName() const;
+    void setScale(float scale);
+    float getScale() const;
 };
 
 class Object2D : public Object {
@@ -81,7 +82,6 @@ private:
     Vector3 position;
     Rectangle collisionBox;
 
-    float scale;
     Color color = WHITE;
     Direction curDirection = DOWN;
     Vector3 ownOx = {1, 0, 0}, ownOy = {0, 1, 0}, ownOz = {0, 0, 1};
@@ -105,9 +105,6 @@ public:
     bool isModelLoaded() const;
     
     void rotate(const Axis axis, float angle);
-    
-    void setScale(float scale);
-    float getScale() const;
     
     void setPosition(const Vector3 &position);
     Vector3 getPosition() const;

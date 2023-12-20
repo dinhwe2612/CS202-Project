@@ -1,6 +1,10 @@
 #include "Button.hpp"
 
-void Button::SetBox(float x, float y, float width, float height, Color colorDefault, Color colorTouched, Color colorClicked) {
+Button::Button() {
+	Object::setType("BUTTON");
+}
+
+void Button::setBox(float x, float y, float width, float height, Color colorDefault, Color colorTouched, Color colorClicked) {
 	buttonShape.x = x;
 	buttonShape.y = y;
 	buttonShape.width = width;
@@ -10,7 +14,7 @@ void Button::SetBox(float x, float y, float width, float height, Color colorDefa
 	colorBoxClicked = colorClicked;
 }
 
-void Button::SetText(Font _font, std::string _Text, Vector2 _coordText, float _fontSize, float _spacing, Color colorDefault, Color colorTouched, Color colorClicked) {
+void Button::setText(Font _font, std::string _Text, Vector2 _coordText, float _fontSize, float _spacing, Color colorDefault, Color colorTouched, Color colorClicked) {
 	font = _font;
 	Text = _Text;
 	coordText = _coordText;
@@ -21,7 +25,7 @@ void Button::SetText(Font _font, std::string _Text, Vector2 _coordText, float _f
 	colorTextClicked = colorClicked;
 }
 
-void Button::DrawText(int &mouseCursor) {
+void Button::draw(int &mouseCursor) {
 	int state = getState();
 	Rectangle currentShape = buttonShape;
 	if (isZoom) {
@@ -77,9 +81,9 @@ void Button::DrawText(int &mouseCursor) {
 	
 }
 
-void Button::DrawText() {
+void Button::draw() {
     int mouseCursor;
-    DrawText(mouseCursor);
+    draw(mouseCursor);
 }
 
 int Button::getState() {

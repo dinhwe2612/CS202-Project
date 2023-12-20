@@ -1,7 +1,7 @@
 #include "UiScene.hpp"
 
-UiScene::UiScene() : state(0) {
-
+UiScene::UiScene() : AScene() {
+    
 }
 
 UiScene::~UiScene() {
@@ -9,12 +9,14 @@ UiScene::~UiScene() {
 }
 
 Scenes UiScene::run() {
-    while(state == -1) {
+    while(state == Scenes::DEFAULT) {
+        BeginDrawing();
         if (WindowShouldClose())
             return Scenes::QUIT;
         triggerInputActions();
         eventScene();
         draw();
+        EndDrawing();
     }
     return endScene();
 }

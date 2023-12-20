@@ -1,8 +1,8 @@
 #include <raylib-cpp.hpp>
 
 #include "object.hpp"
-#include "InputBox.hpp"
-#include "Button.hpp"
+#include "UiObject/InputBox.hpp"
+#include "UiObject/Button.hpp"
 
 #include <fstream>
 #include <iostream>

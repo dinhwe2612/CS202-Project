@@ -2,19 +2,15 @@
 #include "raylib-cpp.hpp"
 
 #include "object.hpp"
-#include "../Scene/IScene.hpp"
+#include "../Scene/SceneGame.hpp"
+#include "../Scene/UiSceneMenu.hpp"
 
-namespace app {
-    class Application {
-    private:
-        raylib::Window *window;
-        raylib::Camera3D *camera;
-        
-
+class Application {
+private:
+    Scenes state;
     IScene *curScene;
-    public:
-        Application(int width, int height, const std::string &title);
-        ~Application();
-        void run();
-    };
+public:
+    Application();
+    ~Application();
+    void run();
 };

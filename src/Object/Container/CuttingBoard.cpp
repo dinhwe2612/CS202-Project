@@ -15,6 +15,13 @@ bool CuttingBoard::placeObjectOn(PickableObject *object) {
 void CuttingBoard::cut() {
     if (resourcesManager->sliceable(name)) {
         std::string newName = resourcesManager->slice(name);
+        std::string path = resourcesManager->pathPickableObject(newName);
+        if (path == "") {
+            setScale(1);
+            setPosition({ 0, 0.6, 0 });
+            setName(newName);
+            return;
+        }
         std::ifstream fin(resourcesManager->pathPickableObject(newName));
         std::string inst;
         while(fin >> inst) {

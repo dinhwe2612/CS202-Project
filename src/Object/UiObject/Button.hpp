@@ -25,10 +25,11 @@ private:
     Color colorTextDefault = BLACK, colorTextTouched = BLACK, colorTextClicked = BLACK;
     Color colorCornerDefault = { 113, 201, 206, 255 }, colorCornerTouched = BLACK, colorCornerClicked = BLACK;
 public:
-    void SetBox(float x, float y, float width, float height, Color colorDefault, Color colorTouched, Color colorClicked);
+    Button();
+    void setBox(float x, float y, float width, float height, Color colorDefault, Color colorTouched, Color colorClicked);
     //For Button Text
-    void SetText(Font _font, std::string _Text, Vector2 _coordText, float _fontSize, float _spacing, Color colorDefault, Color colorTouched, Color colorClicked);
-    void DrawText(int& mouseCursor);
-    void DrawText();
+    void setText(Font _font, std::string _Text, Vector2 _coordText, float _fontSize, float _spacing, Color colorDefault, Color colorTouched, Color colorClicked);
+    void draw(int& mouseCursor);
+    void draw() override;
     int getState();
 };

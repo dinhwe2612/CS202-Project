@@ -34,10 +34,11 @@ file(GLOB SOURCES
     src/Object/Movable/*.cpp
     src/Object/Pickable/*.cpp
     src/Object/Container/*.cpp
+    src/Object/UiObject/*.cpp
     src/Map/*.cpp
     src/Application/*.cpp
     src/Scene/*.cpp
-    src/Mediator/*.cpp
+    src/ObjectManager/*.cpp
     src/Other/*.cpp
     src/ResourcesManager/*.cpp
 )
@@ -46,10 +47,11 @@ include_directories(src)
 include_directories(src/Object)
 include_directories(src/Object/Movable)
 include_directories(src/Object/Pickable)
+include_directories(src/Object/UiObject)
 include_directories(src/Map)
 include_directories(src/Application)
 include_directories(src/Scene)
-include_directories(src/Mediator)
+include_directories(src/ObjectManager)
 include_directories(src/ResourcesManager)
 
 add_executable(${PROJECT_NAME} ${SOURCES})

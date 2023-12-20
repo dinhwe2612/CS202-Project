@@ -10,6 +10,8 @@
 #include "../Object/Container/CuttingBoard.hpp"
 #include "../ResourcesManager/ResourcesManager.hpp"
 #include "../Object/Container/FoodCooker.hpp"
+#include "../Object/Container/GasStove.hpp"
+#include "../Object/TaskManager.hpp"
 
 #include <vector>
 #include <string>

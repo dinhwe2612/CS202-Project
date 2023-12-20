@@ -41,16 +41,20 @@ bool Object::isPressed() const {
     return pressed;
 }
 
-void Object::setMediator(IMediator *mediator) {
-    this->mediator = mediator;
-}
-
 void Object::setName(std::string name) {
     this->name = name;
 }
 
 std::string Object::getName() const {
     return name;
+}
+
+void Object::setScale(float scale) {
+    this->scale = scale;
+}
+
+float Object::getScale() const {
+    return scale;
 }
 
 /////////////////////////////////
@@ -88,11 +92,11 @@ Object3D::~Object3D() {
 }
 
 void Object3D::draw() {
-    if (isModelLoaded()) DrawModel(model, position, scale, color);
+    if (isModelLoaded()) DrawModel(model, position, getScale(), color);
     else {
         ResourcesManager* resourcesManager = ResourcesManager::getInstance();
         if (resourcesManager->hasModel(name)) {
-            DrawModel(resourcesManager->getModel(name), position, scale, color);
+            DrawModel(resourcesManager->getModel(name), position, getScale(), color);
         }
     }
 }
@@ -147,14 +151,6 @@ void Object3D::setModel(const std::string path) {
     modelLoaded = true;
 }
 
-void Object3D::setScale(float scale) {
-    this->scale = scale;
-}
-
-float Object3D::getScale() const {
-    return scale;
-}
-
 void Object3D::setCurrentDirection(Direction curDirection) {
     this->curDirection = curDirection;
 }
@@ -164,7 +160,7 @@ void Object3D::setColor(Color color) {
 }
 
 void Object3D::incScale(float add) {
-    scale += add;
+    setScale(getScale() + add);
 }
 
 Model Object3D::getModel() const {

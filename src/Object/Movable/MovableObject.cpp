@@ -14,7 +14,6 @@ float MovableObject::getSpeed() const {
 
 void MovableObject::moveDirection(Direction direction) {
     rotate(Y, (direction - getCurDirection()) * DEG2RAD);
-    float sqrt_speed = sqrt(speed);
     switch (direction) {
         case UP:
             move({ 0, 0, -speed });
@@ -29,16 +28,16 @@ void MovableObject::moveDirection(Direction direction) {
             move({ speed, 0, 0 });
             break;
         case UL:
-            move({ -sqrt_speed, 0, -sqrt_speed });
+            move({ -speed, 0, -speed });
             break;
         case UR:
-            move({ sqrt_speed, 0, -sqrt_speed });
+            move({ speed, 0, -speed });
             break;
         case DL:
-            move({ -sqrt_speed, 0, sqrt_speed });
+            move({ -speed, 0, speed });
             break;
         case DR:
-            move({ sqrt_speed, 0, sqrt_speed });
+            move({ speed, 0, speed });
             break;
     }
     setCurrentDirection(direction);
@@ -66,18 +65,36 @@ bool checkIntersection(Rectangle A, Rectangle B) {
 
 bool MovableObject::isColliding(Direction direction, std::vector<std::shared_ptr<Object>> &objects) {
     Rectangle newCollisionBox = getCollisionBox();
+    float speed = getSpeed();
+    float sqrt_speed = sqrt(speed);
     switch (direction) {
         case Direction::UP:
-            newCollisionBox.y -= getSpeed();
+            newCollisionBox.y -= speed;
             break;
         case Direction::DOWN:
-            newCollisionBox.y += getSpeed();
+            newCollisionBox.y += speed;
             break;
         case Direction::LEFT:
-            newCollisionBox.x -= getSpeed();
+            newCollisionBox.x -= speed;
             break;
         case Direction::RIGHT:
-            newCollisionBox.x += getSpeed();
+            newCollisionBox.x += speed;
+            break;
+        case Direction::UL:
+            newCollisionBox.x -= sqrt_speed;
+            newCollisionBox.y -= sqrt_speed;
+            break;
+        case Direction::UR:
+            newCollisionBox.x += sqrt_speed;
+            newCollisionBox.y -= sqrt_speed;
+            break;
+        case Direction::DL:
+            newCollisionBox.x -= sqrt_speed;
+            newCollisionBox.y += sqrt_speed;
+            break;
+        case Direction::DR:
+            newCollisionBox.x += sqrt_speed;
+            newCollisionBox.y += sqrt_speed;
             break;
     }
     for (auto &object : objects) {

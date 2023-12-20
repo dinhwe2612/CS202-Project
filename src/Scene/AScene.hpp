@@ -1,19 +1,14 @@
 #pragma once
 #include "IScene.hpp"
 #include "Object.hpp"
-#include "../Application/Application.hpp"
 #include "../Application/InputSupport.hpp"
+#include "ResourcesManager/ResourcesManager.hpp"
 
 #include <unordered_map> 
 #include <functional>
 #include <vector>
 #include <iostream>
 #include <memory>
-
-enum Scenes {
-    GAME,
-    QUIT
-};
 
 struct PairHash {
     template <class T1, class T2>
@@ -26,9 +21,11 @@ struct PairHash {
 
 class AScene : public IScene {
 protected:
+    ResourcesManager *resourcesManager;
     Camera3D camera = { 0 };
     std::vector<std::shared_ptr<Object>> objects;
     InputSupport inputSp;
+    Scenes state;
 public:
     AScene();
     ~AScene();

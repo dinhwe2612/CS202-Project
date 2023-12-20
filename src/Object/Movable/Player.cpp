@@ -19,14 +19,22 @@ Vector2 Player::pointInteract() const {
     float middle_y = area.y + area.height / 2;
     float distance = 0.5;
     switch (getCurDirection()) {
-    case Direction::UP:
-        return { middle_x, area.y - distance };
-    case Direction::DOWN:
-        return { middle_x, area.y + area.height + distance };
-    case Direction::LEFT:
-        return { area.x - distance, middle_y };
-    case Direction::RIGHT:
-        return { area.x + area.width + distance, middle_y };
+        case Direction::UP:
+            return { middle_x, area.y - distance };
+        case Direction::DOWN:
+            return { middle_x, area.y + area.height + distance };
+        case Direction::LEFT:
+            return { area.x - distance, middle_y };
+        case Direction::RIGHT:
+            return { area.x + area.width + distance, middle_y };
+        case Direction::UL:
+            return { area.x - distance, area.y - distance };
+        case Direction::UR:
+            return { area.x + area.width + distance, area.y - distance };
+        case Direction::DL:
+            return { area.x - distance, area.y + area.height + distance };
+        case Direction::DR:
+            return { area.x + area.width + distance, area.y + area.height + distance };
     }
 }
 

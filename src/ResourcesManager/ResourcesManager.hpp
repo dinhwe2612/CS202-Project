@@ -4,19 +4,46 @@
 
 #include <unordered_map>
 #include <algorithm>
+#include <chrono>
+#include <random>
 
 class ResourcesManager {
 private:
+    std::mt19937 rng;
+    std::unordered_map<std::string, std::chrono::time_point<std::chrono::high_resolution_clock>> start;
     std::unordered_map<std::string, Model> listOfModels;
+    std::unordered_map<std::string, Texture> listOfTextures;
+    std::unordered_map<std::string, Font> listOfFonts;
     std::unordered_map<std::string, std::string> listOfSlices;
-    std::unordered_map<std::string, std::string> listOfCooks;
+    std::unordered_map<std::string, std::string> listOfFries;
     std::unordered_map<std::string, std::string> listOfPickableObjects;
+    std::unordered_map<std::string, float> listOfScales;
+    std::unordered_map<std::string, Vector2> listOfPosition;
     std::vector<std::string> listOfIngredients;
     std::vector<std::vector<std::string>> listOfRecipes;
     std::vector<std::string> listOfFoods;
+    std::vector<std::string> listOfTasks;
     static ResourcesManager* instance;
 
-    ResourcesManager() {
+    ResourcesManager() : rng((std::chrono::steady_clock::now().time_since_epoch().count())) {
+        listOfTextures = {
+            {"coin", LoadTexture("../resources/texture/coin.png")},
+            {"timer", LoadTexture("../resources/texture/timer.png")},
+            {"plate_bun_burger", LoadTexture("../resources/texture/plate_bun_burger.png")},
+            {"plate_bun_cheese_tomato", LoadTexture("../resources/texture/plate_bun_cheese_tomato.png")},
+            {"plate_bun_burger", LoadTexture("../resources/texture/plate_bun_burger.png")},
+            {"plate_bun_cheese", LoadTexture("../resources/texture/plate_bun_cheese.png")},
+            {"plate_bun_lettuce", LoadTexture("../resources/texture/plate_bun_lettuce.png")},
+            {"plate_bun_lettuce_cheese", LoadTexture("../resources/texture/plate_bun_lettuce_cheese.png")},
+            {"plate_bun_lettuce_tomato", LoadTexture("../resources/texture/plate_bun_lettuce_tomato.png")},
+            {"plate_bun_tomato", LoadTexture("../resources/texture/plate_bun_tomato.png")},
+            {"task_plate_bun", LoadTexture("../resources/texture/task_plate_bun.png")},
+            {"task_plate_bun_burger", LoadTexture("../resources/texture/task_plate_bun_burger.png")},
+            {"task_plate_bun_cheese", LoadTexture("../resources/texture/task_plate_bun_cheese.png")},
+            {"task_plate_bun_lettuce", LoadTexture("../resources/texture/task_plate_bun_lettuce.png")},
+            {"task_plate_bun_tomato", LoadTexture("../resources/texture/task_plate_bun_tomato.png")},
+            {"restaurant", LoadTexture("../resources/texture/Restaurant.png")},
+        };
         listOfModels = {
             {"bun", LoadModel("../resources/gltf/food_ingredient_bun.gltf")},
             {"cheese", LoadModel("../resources/gltf/food_ingredient_cheese.gltf")},
@@ -64,8 +91,8 @@ private:
             {"steak", "steak_pieces"},
             {"steak_pieces", "burger_uncooked"},
         };
-        listOfCooks = {
-            
+        listOfFries = {
+            {"burger_uncooked", "burger_cooked"},
         };
         listOfPickableObjects = {
             {"cheese", "../resources/map/pickable/ingredient_cheese.txt"},
@@ -90,6 +117,11 @@ private:
             {"bun", "../resources/map/pickable/ingredient_bun.txt"},
             {"plate_small", "../resources/map/pickable/plate_small.txt"},
             {"food_stew", "../resources/map/pickable/food_stew.txt"},
+        };
+        listOfFonts = {
+            {"komyca_italic", LoadFontEx("../resources/font/Komyca3DItalic.ttf", 200, 0, 0)},
+            {"cocktail_italic", LoadFontEx("../resources/font/HiddencocktailsItalic.ttf", 200, 0, 0)},
+            {"cocktail_italic_shadow", LoadFontEx("../resources/font/HiddencocktailsItalicshadow.ttf", 180, 0, 0)},
         };
         listOfRecipes = {
             {"bun"},
@@ -119,6 +151,13 @@ private:
             "plate_bun_lettuce_tomato",
             "plate_bun_cheese_tomato",
         };
+        listOfTasks = {
+            // "task_plate_bun",
+            "task_plate_bun_burger",
+            "task_plate_bun_cheese",
+            "task_plate_bun_lettuce",
+            "task_plate_bun_tomato",
+        };
     }
 
 public:
@@ -127,8 +166,12 @@ public:
             instance = new ResourcesManager();
         return instance;
     }
+    void resetTimer(const std::string name);
+    double getElapsedSeconds(const std::string name);
     bool hasModel(const std::string& name);
     Model getModel(const std::string& name);
+    Texture getTexture(const std::string name);
+    Font getFont(const std::string name);
     bool sliceable(const std::string& name);
     std::string slice(const std::string name);
     std::string pathPickableObject(const std::string& name);
@@ -136,5 +179,11 @@ public:
     std::string cook(std::vector<std::string> ingredients);
     bool isIngredient(const std::string name);
     std::vector<std::string> getRecipe(std::string name);
+    bool fryable(std::string name);
+    std::string fry(std::string name);
+    int getRandomInt(int min, int max);
+    std::string getRandomTask();
+    Vector2 centerText(Font font, Vector2 position, std::string text, float fontSize, float spacing);
+    float getScale(const std::string name);
 };
 

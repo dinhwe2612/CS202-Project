@@ -110,6 +110,10 @@ namespace InputObject {
                             objects.push_back(std::make_shared<CuttingBoard>());
                         } else if (type == "FOODCOOKER") {
                             objects.push_back(std::make_shared<FoodCooker>());
+                        } else if (type == "GASSTOVE") {
+                            objects.push_back(std::make_shared<GasStove>());
+                        } else if (type == "TASKMANAGER") {
+                            objects.push_back(std::make_shared<TaskManager>());
                         }
                         objects.back()->setType(type);
                     } else if (inst == "ROTATE") {

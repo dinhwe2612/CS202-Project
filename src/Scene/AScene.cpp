@@ -1,7 +1,8 @@
 #include "AScene.hpp"
 
 AScene::AScene() {
-    
+    resourcesManager = ResourcesManager::getInstance();
+    state = DEFAULT;
 }
 
 AScene::~AScene() {
