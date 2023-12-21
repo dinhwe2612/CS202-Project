@@ -1,9 +1,8 @@
 #include "Application.hpp"
 
 Application::Application() {
-    state = QUIT;
     InitWindow(3000, 1800, "Burger Restaurant");
-    curScene = new UiSceneMenu();
+    state = MENU;
 }
 
 Application::~Application() {
@@ -12,8 +11,11 @@ Application::~Application() {
 
 void Application::run() {
     while (!WindowShouldClose()) {
+        if (state != DEFAULT) {
+            curScene = enumToConstructor.at(state)();
+        }
         state = curScene->run();
         std::cout << "state: " << state << std::endl;
-        if (state != Scenes::DEFAULT) break;
+        if (state == Scenes::QUIT) break;
     }
 }

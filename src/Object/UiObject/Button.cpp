@@ -14,6 +14,10 @@ void Button::setBox(float x, float y, float width, float height, Color colorDefa
 	colorBoxClicked = colorClicked;
 }
 
+void Button::setBox(float x, float y, float width, float height) {
+	setBox(x, y, width, height, { 0, 0, 0, 100 }, { 0, 0, 0, 100 }, { 0, 0, 0, 100 });
+}
+
 void Button::setText(Font _font, std::string _Text, Vector2 _coordText, float _fontSize, float _spacing, Color colorDefault, Color colorTouched, Color colorClicked) {
 	font = _font;
 	Text = _Text;
@@ -93,17 +97,18 @@ void Button::draw() {
 }
 
 int Button::getState() {
-	if (isTouch()) {
-		if (state == CLICKED && IsMouseButtonReleased(MOUSE_LEFT_BUTTON)) {
-			return state = RELEASED;
-		} else if (IsMouseButtonDown(MOUSE_LEFT_BUTTON)) {
-			return state = CLICKED;
-		}
-		else {
-			return state = TOUCHED;
-		}
-	}
-	return state = DEFAULT;
+	// if (isTouch()) {
+	// 	if (state == CLICKED && IsMouseButtonReleased(MOUSE_LEFT_BUTTON)) {
+	// 		return state = RELEASED;
+	// 	} else if (IsMouseButtonDown(MOUSE_LEFT_BUTTON)) {
+	// 		return state = CLICKED;
+	// 	}
+	// 	else {
+	// 		return state = TOUCHED;
+	// 	}
+	// }
+	// return state = DEFAULT;
+	return state;
 }
 
 void Button::setConer(bool _drawCorner) {

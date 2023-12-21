@@ -27,6 +27,7 @@ public:
     enum BoxState { DEFAULT, TOUCHED, CLICKED, RELEASED };
     Button();
     void setBox(float x, float y, float width, float height, Color colorDefault, Color colorTouched, Color colorClicked);
+    void setBox(float x, float y, float width, float height);
     //For Button Text
     void setText(Font _font, std::string _Text, Vector2 _coordText, float _fontSize, float _spacing, Color colorDefault, Color colorTouched, Color colorClicked);
     void setTextCenter(Font _font, std::string _Text, float _fontSize, float _spacing, Color colorDefault, Color colorTouched, Color colorClicked);

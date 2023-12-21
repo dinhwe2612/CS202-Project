@@ -241,12 +241,12 @@ void ObjectManager::draw_tasks() {
 void ObjectManager::draw() {
     for (auto &object : objects) {
         if (object->isActivate()) object->draw();
-        if (object->getType() == ObjectType::Type::OBJECT3D || object->getType() == ObjectType::CONTAINER || object->getType() == ObjectType::TASKMANAGER) {
-            Object3D *object3d = dynamic_cast<Object3D*>(object.get());
-            if (object3d->isCollisionable() && !object3d->isActivate()) {
-                Rectangle rec = object3d->getCollisionBox();
-                DrawCube((Vector3){ rec.x + rec.width/2, 1, rec.y + rec.height/2 }, rec.width, 2, rec.height, { 255, 0, 0, 100 });
-            }
-        }
+        // if (object->getType() == ObjectType::Type::OBJECT3D || object->getType() == ObjectType::CONTAINER || object->getType() == ObjectType::TASKMANAGER) {
+        //     Object3D *object3d = dynamic_cast<Object3D*>(object.get());
+        //     if (object3d->isCollisionable() && !object3d->isActivate()) {
+        //         Rectangle rec = object3d->getCollisionBox();
+        //         DrawCube((Vector3){ rec.x + rec.width/2, 1, rec.y + rec.height/2 }, rec.width, 2, rec.height, { 255, 0, 0, 100 });
+        //     }
+        // }
     }
 }

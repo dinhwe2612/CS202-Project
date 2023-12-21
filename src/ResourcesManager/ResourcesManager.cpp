@@ -92,3 +92,11 @@ Vector2 ResourcesManager::centerText(Font font, Vector2 position, std::string te
 float ResourcesManager::getScale(const std::string name) {
     return listOfScales[name];
 }
+
+int ResourcesManager::getAnimFramesBurger() {
+    return animFrames;
+}
+
+Image ResourcesManager::getBurgerImage() {
+    return burgerImage;
+}

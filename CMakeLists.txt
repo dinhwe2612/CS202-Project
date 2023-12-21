@@ -41,6 +41,7 @@ file(GLOB SOURCES
     src/ObjectManager/*.cpp
     src/Other/*.cpp
     src/ResourcesManager/*.cpp
+    src/Scene/UiScene/*.cpp
 )
 
 include_directories(src)
@@ -53,6 +54,7 @@ include_directories(src/Application)
 include_directories(src/Scene)
 include_directories(src/ObjectManager)
 include_directories(src/ResourcesManager)
+include_directories(src/Scene/UiScene)
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 11)

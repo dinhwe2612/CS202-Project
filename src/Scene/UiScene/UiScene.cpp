@@ -29,6 +29,7 @@ Scenes UiScene::run() {
         BeginDrawing();
         if (WindowShouldClose())
             return Scenes::QUIT;
+        eventScene();
         triggerInputActions();
         draw();
         EndDrawing();

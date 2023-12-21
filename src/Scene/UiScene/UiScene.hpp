@@ -1,6 +1,6 @@
 #pragma once
 #include "Object.hpp"
-#include "AScene.hpp"
+#include "../AScene.hpp"
 #include "../src/Object/UiObject/Button.hpp"
 
 #include <memory>
