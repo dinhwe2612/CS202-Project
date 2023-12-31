@@ -2,33 +2,30 @@
 
 SceneGame::SceneGame() {
     // Create camera
-    camera.position = (Vector3){ -10.0f, 13.0f, 18.0f };//-10 13 18
-    camera.target = (Vector3){ 0.0f, 0.0f, 0.0f };
-    camera.up = (Vector3){ 0.0f, 90.0f, 0.0f };
-    camera.fovy = 40.0f;
-    camera.projection = CAMERA_PERSPECTIVE;
+    camera = Setting::getInstance()->getCamera();
     // Create object manager
-    objectManager = new ObjectManager("../resources/map");
-    setInputFunction(InputSupport::E, InputSupport::PRESSED, [this]() {
+    objectManager = new ObjectManager(Setting::getInstance()->getPathMap());
+    Setting *setting = Setting::getInstance();
+    setInputFunction(setting->getPickUp(), InputSupport::PRESSED, [this]() {
         objectManager->pick();
     });
-    setInputFunction(InputSupport::Q, InputSupport::PRESSED, [this]() {
+    setInputFunction(setting->getDrop(), InputSupport::PRESSED, [this]() {
         objectManager->drop();
     });
-    setInputFunction(InputSupport::SPACE, InputSupport::PRESSED, [this]() {
+    setInputFunction(setting->getCutCook(), InputSupport::PRESSED, [this]() {
         objectManager->cut_cook();
         objectManager->submitTask();
     });
-    setInputFunction(InputSupport::W, InputSupport::DOWN, [this]() {
+    setInputFunction(setting->getMoveUp(), InputSupport::DOWN, [this]() {
         objectManager->movePlayer(Direction::UP);
     });
-    setInputFunction(InputSupport::S, InputSupport::DOWN, [this]() {
+    setInputFunction(setting->getMoveDown(), InputSupport::DOWN, [this]() {
         objectManager->movePlayer(Direction::DOWN);
     });
-    setInputFunction(InputSupport::A, InputSupport::DOWN, [this]() {
+    setInputFunction(setting->getMoveLeft(), InputSupport::DOWN, [this]() {
         objectManager->movePlayer(Direction::LEFT);
     });
-    setInputFunction(InputSupport::D, InputSupport::DOWN, [this]() {
+    setInputFunction(setting->getMoveRight(), InputSupport::DOWN, [this]() {
         objectManager->movePlayer(Direction::RIGHT);
     });
 }
@@ -40,10 +37,12 @@ SceneGame::~SceneGame() {
 void SceneGame::draw() {
     triggerInputActions();
     objectManager->update();
+    if (objectManager->isEndGame())
+        state = Scenes::ENDGAME;
     
-    ClearBackground(BLACK);
     BeginDrawing();
-    BeginMode3D(camera);
+    ClearBackground(BLACK);
+    BeginMode3D(*camera);
         objectManager->draw();
     EndMode3D();
     objectManager->draw_tasks();
@@ -52,9 +51,9 @@ void SceneGame::draw() {
 
 Scenes SceneGame::run() {
     while(state == Scenes::DEFAULT) {
-        if (WindowShouldClose())
-            return Scenes::QUIT;
         draw();
+        if (WindowShouldClose())
+            return Scenes::PAUSE;
     }
     return state;
 }

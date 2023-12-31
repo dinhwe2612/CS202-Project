@@ -2,7 +2,7 @@
 
 Application::Application() {
     InitWindow(3000, 1800, "Burger Restaurant");
-    state = MENU;
+    state = Scenes::MENU;
 }
 
 Application::~Application() {
@@ -12,9 +12,20 @@ Application::~Application() {
 void Application::run() {
     while (!WindowShouldClose()) {
         if (state != DEFAULT) {
-            curScene = enumToConstructor.at(state)();
+            if (state == PAUSE) {
+                prevScene = std::move(curScene);
+            }
+            if (state == GAME && prevScene != NULL) {
+                curScene = std::move(prevScene);
+            } else {
+                curScene = std::move(enumToConstructor.at(state)());
+            }
         }
         state = curScene->run();
+        if (state != PAUSE && state != GAME) {
+            prevScene.release();
+            prevScene = NULL;
+        }
         std::cout << "state: " << state << std::endl;
         if (state == Scenes::QUIT) break;
     }

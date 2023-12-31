@@ -1,3 +1,5 @@
+#pragma once
+
 #include "raylib-cpp.hpp"
 
 class InputSupport {

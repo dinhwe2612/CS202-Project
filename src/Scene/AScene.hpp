@@ -22,7 +22,6 @@ struct PairHash {
 class AScene : public IScene {
 protected:
     ResourcesManager *resourcesManager;
-    Camera3D camera = { 0 };
     std::vector<std::shared_ptr<Object>> objects;
     InputSupport inputSp;
     Scenes state;

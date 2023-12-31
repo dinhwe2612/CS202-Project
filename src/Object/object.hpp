@@ -60,7 +60,7 @@ public:
 
 class Object2D : public Object {
 protected:
-    Vector2 position;
+    Vector2 position = { 0, 0 };
 public:
     explicit Object2D();
     ~Object2D();

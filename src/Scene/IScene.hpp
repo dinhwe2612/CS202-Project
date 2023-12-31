@@ -8,6 +8,8 @@ enum Scenes {
     CREDIT,
     NEWGAME,
     GAME,
+    PAUSE,
+    ENDGAME,
     QUIT
 };
 // interface for scene

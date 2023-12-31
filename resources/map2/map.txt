@@ -1,0 +1,8 @@
+TYPE OBJECT3D
+NAME map2
+POSITION 0 -1 0
+SCALE 1
+COLLISION -8.6 -8.3 19.5 15.3
+ACTIVATE 1
+MODEL ../resources/models/map2_basic_ex.glb
+ROTATE Y -90

@@ -15,7 +15,11 @@ void Button::setBox(float x, float y, float width, float height, Color colorDefa
 }
 
 void Button::setBox(float x, float y, float width, float height) {
-	setBox(x, y, width, height, { 0, 0, 0, 100 }, { 0, 0, 0, 100 }, { 0, 0, 0, 100 });
+	buttonShape.x = x;
+	buttonShape.y = y;
+	buttonShape.width = width;
+	buttonShape.height = height;
+	colorBoxClicked = colorBoxTouched = colorBoxDefault = { 0, 0, 0, 0 };
 }
 
 void Button::setText(Font _font, std::string _Text, Vector2 _coordText, float _fontSize, float _spacing, Color colorDefault, Color colorTouched, Color colorClicked) {

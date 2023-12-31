@@ -1,3 +1,0 @@
-NAME food_stew
-SCALE 1
-POSITION 0 0.6 0

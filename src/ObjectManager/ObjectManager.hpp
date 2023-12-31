@@ -26,6 +26,7 @@ public:
     void cut_cook();
     void movePlayer(Direction direction);
     void movePlayer();
+    bool isEndGame();
     void update();
     void draw();
 };

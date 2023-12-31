@@ -1,3 +1,0 @@
-TYPE OBJECT3D
-NAME crate_carrot
-COLLISION -2.7 7 2 1.6

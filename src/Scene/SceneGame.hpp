@@ -5,12 +5,14 @@
 #include "../Other/AdjustObject.hpp"
 #include "../ObjectManager/ObjectManager.hpp"
 #include "../ResourcesManager/ResourcesManager.hpp"
+#include "../Application/Setting.hpp"
 
 #include <vector>
 
 class SceneGame : public AScene {
 private:
     ObjectManager *objectManager;
+    Camera3D *camera;
 public:
     SceneGame();
     ~SceneGame();

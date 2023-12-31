@@ -73,7 +73,12 @@ namespace InputObject {
                 fin.open(pathToDirectory + "/" + entry->d_name);
                 std::string inst;
                 while(fin >> inst) {
-                    if (inst == "POSITION") {
+                    if (inst == "MODEL") {
+                        Object3D *object = dynamic_cast<Object3D *>(objects.back().get());
+                        std::string pathToModel;
+                        fin >> pathToModel;
+                        object->setModel(pathToModel);
+                    } if (inst == "POSITION") {
                         Object3D *object = dynamic_cast<Object3D *>(objects.back().get());
                         float x, y, z;
                         fin >> x >> y >> z;

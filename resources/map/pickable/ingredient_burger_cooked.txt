@@ -1,3 +1,0 @@
-NAME burger_cooked
-POSITION 0 0.6 0
-SCALE 1

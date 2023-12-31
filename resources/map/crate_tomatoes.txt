@@ -1,3 +1,0 @@
-TYPE OBJECT3D
-NAME crate_tomato
-COLLISION -7 7 2 1.8

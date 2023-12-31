@@ -83,6 +83,6 @@ float TaskManager::remainingTimeAddNewTask() {
     return curTimeAddNewTask += GetFrameTime();
 }
 
-void TaskManager::pause() {
-    
+int TaskManager::getTotalPoints() {
+    return totalPoints;
 }

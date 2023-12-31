@@ -1,20 +1,39 @@
 #include "UiScenePauseGame.hpp"
 
 UiScenePauseGame::UiScenePauseGame() : UiScene() {
-    // resume, setting, quit
-    // buttons.emplace_back(std::unique_ptr<Button>(new Button("Resume", 0, 0, 0, 0)));
+    buttons.push_back(std::unique_ptr<Button>(new Button()));
+    buttons.back()->setBox(1096.9, 605.9, 806.2, 242.5, 
+                            { 0, 0, 0, 0 }, 
+                            { 0, 0, 0, 0 }, 
+                            { 0, 0, 0, 50 });
+    buttons.push_back(std::unique_ptr<Button>(new Button()));
+    buttons.back()->setBox(1096.9, 961.2, 806.2, 242.5, 
+                            { 0, 0, 0, 0 }, 
+                            { 0, 0, 0, 0 }, 
+                            { 0, 0, 0, 50 });
+    setInputFunction(InputSupport::MOUSE_LEFT, InputSupport::RELEASED, [this]() {
+        if (buttons[0]->isTouch()) {
+            state = Scenes::GAME;
+        } else if (buttons[1]->isTouch()) {
+            state = Scenes::MENU;
+        }
+    });
 }
 
 void UiScenePauseGame::eventScene() {
-    if (buttons[0]->getState() == Button::CLICKED) {
-        state = DEFAULT;
-    } else if (buttons[1]->getState() == Button::CLICKED) {
-        state = QUIT;
+    for(auto& button : buttons) {
+        int stateButton = button->getState();
+        if (stateButton == Button::TOUCHED || stateButton == Button::CLICKED) {
+            button->setConer(true);
+        } else {
+            button->setConer(false);
+        }
     }
 }
 
 void UiScenePauseGame::draw() {
-    for (auto &button : buttons) {
+    DrawTexture(resourcesManager->getTexture("ScenePauseGame"), 0, 0, WHITE);
+    for(auto& button : buttons) {
         button->draw();
     }
 }

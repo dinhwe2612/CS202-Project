@@ -1,6 +1,7 @@
 #include "UiScene.hpp"
 
 UiScene::UiScene() : AScene() {
+    state = Scenes::DEFAULT;
     setInputFunction(InputSupport::MOUSE_LEFT, InputSupport::DEFAULT, [this]() {
         for(auto &button : buttons) {
             if(button->isTouch()) {

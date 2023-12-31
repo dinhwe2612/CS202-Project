@@ -1,9 +1,8 @@
 #include "UiSceneNewGame.hpp"
 
 UiSceneNewGame::UiSceneNewGame() : UiScene() {
-    animFrames = resourcesManager->getAnimFramesBurger();
-    burgerImage = resourcesManager->getBurgerImage();
-    burger = resourcesManager->getTexture("burger");
+    burgerGif = new Gif("../resources/texture/burger.gif", 8);
+    burgerGif->setPosition({ 1900, -50 });
     for(int i = 0; i < 4; ++i) {
         buttons.push_back(std::unique_ptr<Button>(new Button()));
     }
@@ -41,30 +40,13 @@ void UiSceneNewGame::eventScene() {
             colors[i] = WHITE;
         }
     }
-    // update texture by currentAnimFrame
-    frameCounter++;
-        if (frameCounter >= frameDelay)
-        {
-            // Move to next frame
-            // NOTE: If final frame is reached we return to first frame
-            currentAnimFrame++;
-            if (currentAnimFrame >= animFrames) currentAnimFrame = 0;
-
-            // Get memory offset position for next frame data in image.data
-            nextFrameDataOffset = burgerImage.width*burgerImage.height*4*currentAnimFrame;
-
-            // Update GPU texture data with next frame image data
-            // WARNING: Data size (frame size) and pixel format must match already created texture
-            UpdateTexture(burger, ((unsigned char *)burgerImage.data) + nextFrameDataOffset);
-
-            frameCounter = 0;
-        }
+    burgerGif->update();
 }
 
 void UiSceneNewGame::draw() {
     ClearBackground(BLACK);
     DrawTextureEx(resourcesManager->getTexture("backgroundSceneNewGame"), { 0, 0 }, 0, 1, WHITE);
-    DrawTexture(burger, 1900, -50, WHITE);
+    burgerGif->draw();
     DrawTextureEx(resourcesManager->getTexture("map1"), { 0, 0 }, 0, 1, WHITE);
     DrawTextureEx(resourcesManager->getTexture("arrowBack"), { 0, 0 }, 0, 1, colors[0]);
     DrawTextureEx(resourcesManager->getTexture("arrowLeft"), { 0, 0 }, 0, 1, colors[1]);

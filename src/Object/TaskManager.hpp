@@ -27,7 +27,7 @@ public:
     void update();
     bool addTask();
     void addPoints(float points);
+    int getTotalPoints();
     bool submitTask(std::string name);
     float remainingTime();
-    void pause();
 };

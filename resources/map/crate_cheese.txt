@@ -1,3 +1,0 @@
-TYPE OBJECT3D
-NAME crate_cheese
-COLLISION -9 2.9 2 1.8

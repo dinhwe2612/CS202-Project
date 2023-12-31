@@ -1,0 +1,7 @@
+TYPE OBJECT3D
+NAME trash
+ACTIVATE 1
+MODEL ../resources/gltf/trashcan.glb
+POSITION 5 0.6 -1.7 
+COLLISION 4.325 -2.375 1.35 1.35
+SCALE 1
