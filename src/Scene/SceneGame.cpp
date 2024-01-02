@@ -35,11 +35,6 @@ SceneGame::~SceneGame() {
 }
 
 void SceneGame::draw() {
-    triggerInputActions();
-    objectManager->update();
-    if (objectManager->isEndGame())
-        state = Scenes::ENDGAME;
-    
     BeginDrawing();
     ClearBackground(BLACK);
     BeginMode3D(*camera);
@@ -51,9 +46,14 @@ void SceneGame::draw() {
 
 Scenes SceneGame::run() {
     while(state == Scenes::DEFAULT) {
+        triggerInputActions();
+        objectManager->update();
+        if (objectManager->isEndGame())
+            state = Scenes::ENDGAME;
         draw();
         if (WindowShouldClose())
             return Scenes::PAUSE;
     }
+    fade(true);
     return state;
 }

@@ -26,7 +26,7 @@ Setting::Setting() {
     setPickUp(InputSupport::Key::E);
     setDrop(InputSupport::Key::Q);
     setCutCook(InputSupport::Key::SPACE);
-    curMap = 0;
+    curMap = 1;
 }
 
 bool Setting::set(int id, int _key) {

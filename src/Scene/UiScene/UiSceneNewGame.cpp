@@ -30,6 +30,9 @@ UiSceneNewGame::UiSceneNewGame() : UiScene() {
             }
         }
     });
+    for(int i = 0; i < buttons.size(); ++i) {
+        colors[i] = WHITE;
+    }
 }
 
 void UiSceneNewGame::eventScene() {

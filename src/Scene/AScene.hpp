@@ -20,6 +20,9 @@ struct PairHash {
 };
 
 class AScene : public IScene {
+private:
+    bool isFade = true;
+    int maxFrames = 200;
 protected:
     ResourcesManager *resourcesManager;
     std::vector<std::shared_ptr<Object>> objects;
@@ -29,9 +32,11 @@ public:
     AScene();
     ~AScene();
     virtual void draw() = 0;
-    void triggerInputActions();
     void setInputFunction(InputSupport::Key key, InputSupport::InputType type, std::function<void()> func);
 protected:
+    void setFade(bool isFade, int maxFrame);
+    void fade(bool out);
+    void triggerInputActions();
     std::unordered_map<std::pair<int, int>,std::function<void()>,PairHash> listOfkeys = {
         {{InputSupport::MOUSE_LEFT, InputSupport::DEFAULT}, {[](){}}},
 

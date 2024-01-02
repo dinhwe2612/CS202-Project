@@ -65,3 +65,26 @@ void AScene::setInputFunction(InputSupport::Key key, InputSupport::InputType typ
         itKey->second = func;
     }
 }
+
+void AScene::fade(bool out) {
+    if (!isFade) {
+        return;
+    }
+    for(int i = 0; i < maxFrames; ++i) {
+        BeginDrawing();
+        draw();
+        if (out) {
+            Color color = { 0, 0, 0, (int)(255 * ((float)i / maxFrames)) };
+            DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), color);
+        } else {
+            Color color = { 0, 0, 0, (int)(255 * ((float)(maxFrames - i) / maxFrames)) };
+            DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), color);
+        }
+        EndDrawing();
+    }
+}
+
+void AScene::setFade(bool isFade, int maxFrame) {
+    this->isFade = isFade;
+    this->maxFrames = maxFrame;
+}

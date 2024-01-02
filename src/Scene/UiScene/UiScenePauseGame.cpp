@@ -18,6 +18,7 @@ UiScenePauseGame::UiScenePauseGame() : UiScene() {
             state = Scenes::MENU;
         }
     });
+    setFade(false, 0);
 }
 
 void UiScenePauseGame::eventScene() {

@@ -26,6 +26,7 @@ UiScene::~UiScene() {
 }
 
 Scenes UiScene::run() {
+    fade(false);
     while(state == DEFAULT) {
         BeginDrawing();
         if (WindowShouldClose())
@@ -35,5 +36,6 @@ Scenes UiScene::run() {
         draw();
         EndDrawing();
     }
+    fade(true);
     return state;
 }
