@@ -2,7 +2,7 @@
 
 TaskManager::TaskManager() {
     resourcesManager = ResourcesManager::getInstance();
-    timeLimit = 60;
+    timeLimit = 120;
     timeAddNewTask = 1;
     durationTask = 20;
     totalPoints = 0;
@@ -56,12 +56,13 @@ void TaskManager::update() {
 
 
 void TaskManager::draw() {
-    Vector2 position = { -50, 0 };
+    Vector2 position = { -90, -70 };
     for (auto& task : tasks) {
         task->draw(position);
         position.x += distanceBetweenTasks;
     }
     DrawTextureEx(resourcesManager->getTexture("timer"), { 2500, 1350 }, 0, 0.8, WHITE);
+    
     float curRemainingTime = remainingTime();
     int minutes = curRemainingTime / 60;
     int seconds = curRemainingTime - minutes * 60;

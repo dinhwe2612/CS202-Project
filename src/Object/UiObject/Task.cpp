@@ -19,7 +19,7 @@ Task::~Task() {
 }
 
 void Task::draw() {
-    DrawRectangle(recTimeLine.x + getPosition().x, recTimeLine.y + getPosition().y, curTimeLine, recTimeLine.height, WHITE);
+    DrawRectangle(recTimeLine.x + getPosition().x, recTimeLine.y + getPosition().y, curTimeLine, recTimeLine.height, timeLineColorCurrent);
     DrawTextureEx(resourcesManager->getTexture(getName()), getPosition(), 0, getScale(), color);
 }
 
@@ -53,6 +53,10 @@ void Task::update() {
             isRemoved = true;
         }
     }
+    // convert color from green to red
+    timeLineColorCurrent.r = timeLineColorFrom.r + (timeLineColorTo.r - timeLineColorFrom.r) * (1 - remaining / duration);
+    timeLineColorCurrent.g = timeLineColorFrom.g + (timeLineColorTo.g - timeLineColorFrom.g) * (1 - remaining / duration);
+    timeLineColorCurrent.b = timeLineColorFrom.b + (timeLineColorTo.b - timeLineColorFrom.b) * (1 - remaining / duration);
 }
 
 bool Task::finishedRemoval() {

@@ -17,7 +17,7 @@ Vector2 Player::pointInteract() const {
     Rectangle area = getCollisionBox();
     float middle_x = area.x + area.width / 2;
     float middle_y = area.y + area.height / 2;
-    float distance = 0.5;
+    float distance = std::max(area.width, area.height) / 2;
     switch (getCurDirection()) {
         case Direction::UP:
             return { middle_x, area.y - distance };

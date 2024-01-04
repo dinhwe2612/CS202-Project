@@ -35,24 +35,27 @@ SceneGame::~SceneGame() {
 }
 
 void SceneGame::draw() {
-    BeginDrawing();
-    ClearBackground(BLACK);
     BeginMode3D(*camera);
         objectManager->draw();
     EndMode3D();
     objectManager->draw_tasks();
-    EndDrawing();
 }
 
 Scenes SceneGame::run() {
+    // fade(false);
     while(state == Scenes::DEFAULT) {
+        BeginDrawing();
+        ClearBackground(BLACK);
         triggerInputActions();
         objectManager->update();
+        camera->position.x = objectManager->getPosPlayer().x;
+        camera->target.x = camera->position.x;
         if (objectManager->isEndGame())
             state = Scenes::ENDGAME;
         draw();
         if (WindowShouldClose())
             return Scenes::PAUSE;
+        EndDrawing();
     }
     fade(true);
     return state;

@@ -17,6 +17,13 @@ Setting::Setting() {
         (Vector3){ 0.0f, 90.0f, 0.0f }, 
         40.0f,
         CAMERA_PERSPECTIVE
+    },
+    (Camera3D) {
+        (Vector3){ -1.0f, 6.0f, 10.0f },// position
+        (Vector3){ -1.0f, 0.8f, -0.4f },// target
+        (Vector3){ 0.0f, 1.0f, 0.0f },// up
+        14.0f,// fovy
+        CAMERA_PERSPECTIVE// projection
     }
     };
     setMoveUp(InputSupport::Key::W);
@@ -26,7 +33,7 @@ Setting::Setting() {
     setPickUp(InputSupport::Key::E);
     setDrop(InputSupport::Key::Q);
     setCutCook(InputSupport::Key::SPACE);
-    curMap = 1;
+    curMap = 2;
 }
 
 bool Setting::set(int id, int _key) {

@@ -29,4 +29,5 @@ public:
     bool isEndGame();
     void update();
     void draw();
+    Vector3 getPosPlayer();
 };

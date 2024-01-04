@@ -242,6 +242,11 @@ bool ObjectManager::submitTask() {
     return false;
 }
 
+Vector3 ObjectManager::getPosPlayer() {
+    Player *player = dynamic_cast<Player *>(objects.back().get());
+    return player->getPosition();
+}
+
 void ObjectManager::draw_tasks() {
     for(auto &object : objects) {
         if (object->getType() == ObjectType::TASKMANAGER) {

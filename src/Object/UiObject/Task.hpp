@@ -15,6 +15,9 @@ private:
     bool isRemoved = false;
     float points;
     Vector2 posPointPlus;
+    Color timeLineColorFrom = { 0, 128, 0, 255 };
+    Color timeLineColorTo = { 255, 0, 0, 255 };
+    Color timeLineColorCurrent = timeLineColorFrom;
     Rectangle recTimeLine;
 public: 
     Task(std::string name, float duration);

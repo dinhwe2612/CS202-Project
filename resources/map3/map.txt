@@ -1,0 +1,8 @@
+TYPE OBJECT3D
+NAME map3
+POSITION 0 0 0
+SCALE 1
+ACTIVATE 1
+COLLISION -5.3 -3 7 4
+MODEL ../resources/models/map3_basic_ex.glb
+ROTATE Y 90
