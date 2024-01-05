@@ -11,6 +11,7 @@
 
 class SceneGame : public AScene {
 private:
+    Music music;
     ObjectManager *objectManager;
     Camera3D *camera;
 public:

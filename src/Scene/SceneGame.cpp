@@ -1,6 +1,7 @@
 #include "SceneGame.hpp"
 
 SceneGame::SceneGame() {
+    music = Setting::getInstance()->getMusic("Game");
     // Create camera
     camera = Setting::getInstance()->getCamera();
     // Create object manager
@@ -43,7 +44,13 @@ void SceneGame::draw() {
 
 Scenes SceneGame::run() {
     // fade(false);
+    SetMusicVolume(music, 0.2);
+    PlayMusicStream(music);
     while(state == Scenes::DEFAULT) {
+        if (!Setting::getInstance()->IsMute()) {
+            UpdateMusicStream(music);
+        }
+        
         BeginDrawing();
         ClearBackground(BLACK);
         triggerInputActions();

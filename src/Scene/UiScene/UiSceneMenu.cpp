@@ -12,7 +12,6 @@ UiSceneMenu::UiSceneMenu() : UiScene() {
                             BLACK,
                             BLACK,
                             BLACK);
-    buttons.back()->setConer(true);
     buttons.push_back(std::unique_ptr<Button>(new Button()));
     buttons.back()->setBox(2120, 680, 700, 200, 
                             { 0, 0, 0, 0 }, 
@@ -24,9 +23,8 @@ UiSceneMenu::UiSceneMenu() : UiScene() {
                             BLACK,
                             BLACK,
                             BLACK);
-    buttons.back()->setConer(true);
     buttons.push_back(std::unique_ptr<Button>(new Button()));
-    buttons.back()->setBox(2245, 980, 450, 200, 
+    buttons.back()->setBox(2245, 1280, 450, 200, 
                             { 0, 0, 0, 0 }, 
                             { 255, 255, 255, 100 }, 
                             { 0, 0, 0, 50 });
@@ -36,19 +34,17 @@ UiSceneMenu::UiSceneMenu() : UiScene() {
                             BLACK,
                             BLACK,
                             BLACK);
-    buttons.back()->setConer(true);
     buttons.push_back(std::unique_ptr<Button>(new Button()));
-    buttons.back()->setBox(2170, 1280, 620, 200, 
+    buttons.back()->setBox(2000, 980, 960, 200, 
                             { 0, 0, 0, 0 }, 
                             { 255, 255, 255, 100 }, 
                             { 0, 0, 0, 50 });
     buttons.back()->setTextCenter(resourcesManager->getFont("cocktail_italic_shadow"),
-                            "CREDIT",
+                            "HIGH SCORE",
                             200, 1,
                             BLACK,
                             BLACK,
                             BLACK);
-    buttons.back()->setConer(true);
     setInputFunction(InputSupport::MOUSE_LEFT, InputSupport::RELEASED, [this]() {
         for(auto &button : buttons) {
             if(button->isTouch()) {
@@ -58,8 +54,8 @@ UiSceneMenu::UiSceneMenu() : UiScene() {
                     state = Scenes::SETTING;
                 else if (button->getText() == "QUIT")
                     state = Scenes::QUIT;
-                else if (button->getText() == "CREDIT")
-                    state = Scenes::CREDIT;
+                else if (button->getText() == "HIGH SCORE")
+                    state = Scenes::HIGHSCORE;
                 break;
             }
         }
@@ -67,6 +63,13 @@ UiSceneMenu::UiSceneMenu() : UiScene() {
 }
 
 void UiSceneMenu::eventScene() {
+    for(int i = 0; i < buttons.size(); i++) {
+        if (buttons[i]->isTouch()) {
+            buttons[i]->setConer(true);
+        } else {
+            buttons[i]->setConer(false);
+        }
+    }
 }
 
 void UiSceneMenu::draw() {

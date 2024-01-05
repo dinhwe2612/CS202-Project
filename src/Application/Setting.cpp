@@ -34,6 +34,23 @@ Setting::Setting() {
     setDrop(InputSupport::Key::Q);
     setCutCook(InputSupport::Key::SPACE);
     curMap = 2;
+    isMute = false;
+    InitAudioDevice();
+    listOfSounds = {
+        {"click", LoadSound("../resources/sounds/mixkit-arcade-game-jump-coin.wav")},
+        {"submit", LoadSound("../resources/sounds/submit.mp3")},
+        {"pick_drop", LoadSound("../resources/sounds/pick_drop.mp3")},
+        {"cut", LoadSound("../resources/sounds/cut.mp3")},
+        {"cook", LoadSound("../resources/sounds/cook.mp3")}
+    };
+    listOfMusics = {
+        {"UI", LoadMusicStream("../resources/sounds/Background.wav")},
+        {"Game", LoadMusicStream("../resources/sounds/Feel-Good.mp3")}
+    };
+    backgroundMusic = listOfMusics["UI"];
+    PlayMusicStream(backgroundMusic);
+    SetMusicVolume(backgroundMusic, 0.5);
+    SetAudioStreamBufferSizeDefault(1024);
 }
 
 bool Setting::set(int id, int _key) {
@@ -161,6 +178,26 @@ void Setting::setCurMap(int curMap) {
     this->curMap = curMap;
 }
 
+int Setting::getCurMap() {
+    return curMap;
+}
+
 std::string Setting::getPathMap() {
     return "../resources/map" + std::to_string(curMap + 1);
+}
+
+void Setting::playSound(std::string name) {
+    if (isMute) return;
+    if (name == "click") SetSoundVolume(listOfSounds[name], 1);
+    else SetSoundVolume(listOfSounds[name], 1.5);
+    PlaySound(listOfSounds[name]);
+}
+
+void Setting::updateMusic() {
+    if (isMute) return;
+    UpdateMusicStream(backgroundMusic);
+}
+
+Music Setting::getMusic(std::string name) {
+    return listOfMusics[name];
 }

@@ -13,6 +13,10 @@ PickableObject::PickableObject(std::string name) : Object3D() {
         setName(name);
         setScale(1);
         setPosition({ 0, 0.6, 0 });
+        if (Setting::getInstance()->getCurMap() == 2) {
+            setScale(0.15);
+            setPosition({ 0, 0.26, 0 });
+        }
         return;
     }
     std::ifstream fin(pathToFile);
@@ -44,6 +48,10 @@ PickableObject::PickableObject(std::string name) : Object3D() {
         }
     }
     fin.close();
+    if (Setting::getInstance()->getCurMap() == 2) {
+        setScale(0.15);
+        setPosition({ 0, 0.26, 0 });
+    }
 }
 
 PickableObject::~PickableObject() {

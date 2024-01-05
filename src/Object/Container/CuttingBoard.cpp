@@ -20,6 +20,10 @@ void CuttingBoard::cut() {
             setScale(1);
             setPosition({ 0, 0.6, 0 });
             setName(newName);
+            if (Setting::getInstance()->getCurMap() == 2) {
+                setScale(0.15);
+                setPosition({ 0, 0.26, 0 });
+            }
             return;
         }
         std::ifstream fin(resourcesManager->pathPickableObject(newName));
@@ -51,5 +55,9 @@ void CuttingBoard::cut() {
             }
         }
         fin.close();
+        if (Setting::getInstance()->getCurMap() == 2) {
+            setScale(0.15);
+            setPosition({ 0, 0.26, 0 });
+        }
     }
 }

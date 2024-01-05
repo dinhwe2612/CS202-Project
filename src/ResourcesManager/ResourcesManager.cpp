@@ -19,13 +19,18 @@ ResourcesManager::ResourcesManager() : rng((std::chrono::steady_clock::now().tim
         {"plate_bun_lettuce_cheese", LoadTexture("../resources/texture/plate_bun_lettuce_cheese.png")},
         {"plate_bun_lettuce_tomato", LoadTexture("../resources/texture/plate_bun_lettuce_tomato.png")},
         {"plate_bun_tomato", LoadTexture("../resources/texture/plate_bun_tomato.png")},
-        {"task_plate_bun", LoadTexture("../resources/texture/task_plate_bun.png")},
+        // {"task_plate_bun", LoadTexture("../resources/texture/task_plate_bun.png")},
         {"task_plate_bun_burger", LoadTexture("../resources/texture/task_plate_bun_burger.png")},
         {"task_plate_bun_cheese", LoadTexture("../resources/texture/task_plate_bun_cheese.png")},
         {"task_plate_bun_lettuce", LoadTexture("../resources/texture/task_plate_bun_lettuce.png")},
         {"task_plate_bun_tomato", LoadTexture("../resources/texture/task_plate_bun_tomato.png")},
+        {"task_plate_bun_cheese_tomato", LoadTexture("../resources/texture/task_plate_bun_cheese_tomato.png")},
+        {"task_plate_bun_lettuce_cheese", LoadTexture("../resources/texture/task_plate_bun_lettuce_cheese.png")},
+        {"task_plate_bun_lettuce_tomato", LoadTexture("../resources/texture/task_plate_bun_lettuce_tomato.png")},
         {"restaurant", LoadTexture("../resources/texture/Restaurant.png")},
         {"map1", LoadTexture("../resources/texture/map1.png")},
+        {"map2", LoadTexture("../resources/texture/map2.png")},
+        {"map3", LoadTexture("../resources/texture/map3.png")},
         {"arrowLeft", LoadTexture("../resources/texture/arrowLeft.png")},
         {"arrowRight", LoadTexture("../resources/texture/arrowRight.png")},
         {"arrowBack", LoadTexture("../resources/texture/arrowBack.png")},
@@ -36,6 +41,8 @@ ResourcesManager::ResourcesManager() : rng((std::chrono::steady_clock::now().tim
         {"Apply", LoadTexture("../resources/texture/Apply.png")},
         {"tick", LoadTexture("../resources/texture/tick.png")},
         {"SceneEndGame", LoadTexture("../resources/texture/SceneEndGame.png")},
+        {"SceneHighScore", LoadTexture("../resources/texture/SceneHighScore.png")},
+        {"BurgerDrop", LoadTexture("../resources/texture/BurgerDrop.png")}
     };
     listOfModels = {
         {"bun", LoadModel("../resources/gltf/food_ingredient_bun.gltf")},
@@ -151,6 +158,9 @@ ResourcesManager::ResourcesManager() : rng((std::chrono::steady_clock::now().tim
         "task_plate_bun_cheese",
         "task_plate_bun_lettuce",
         "task_plate_bun_tomato",
+        "task_plate_bun_cheese_tomato",
+        "task_plate_bun_lettuce_cheese",
+        "task_plate_bun_lettuce_tomato",
     };
 }
 

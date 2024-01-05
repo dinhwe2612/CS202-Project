@@ -5,7 +5,7 @@ enum Scenes {
     DEFAULT = -1,
     MENU,
     SETTING,
-    CREDIT,
+    HIGHSCORE,
     NEWGAME,
     GAME,
     PAUSE,

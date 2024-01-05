@@ -28,6 +28,7 @@ UiScene::~UiScene() {
 Scenes UiScene::run() {
     fade(false);
     while(state == DEFAULT) {
+        Setting::getInstance()->updateMusic();
         BeginDrawing();
         if (WindowShouldClose())
             return Scenes::QUIT;

@@ -8,6 +8,7 @@
 #include "../Scene/UiScene/UiScenePauseGame.hpp"
 #include "../Scene/UiScene/UiSceneSettingGame.hpp"
 #include "../Scene/UiScene/UiSceneEndGame.hpp"
+#include "../Scene/UiScene/UiSceneHighScore.hpp"
 
 #include <unordered_map>
 #include <memory>
@@ -19,6 +20,7 @@ static const std::unordered_map<Scenes, std::function<std::unique_ptr<IScene>()>
     {Scenes::PAUSE, [](){return std::unique_ptr<IScene>(new UiScenePauseGame());}},
     {Scenes::SETTING, [](){return std::unique_ptr<IScene>(new UiSceneSettingGame());}},
     {Scenes::ENDGAME, [](){return std::unique_ptr<IScene>(new UiSceneEndGame());}},
+    {Scenes::HIGHSCORE, [](){return std::unique_ptr<IScene>(new UiSceneHighScore());}}
 };
 
 class Application {

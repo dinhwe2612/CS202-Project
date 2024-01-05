@@ -46,6 +46,7 @@ bool Player::isPicking() {
 bool Player::pickUpObject(std::string name) {
     if (pickableObject) return false;
     pickableObject = new PickableObject(name);
+    Setting::getInstance()->playSound("pick_drop");
     return true;
 }
 
@@ -53,6 +54,7 @@ bool Player::dropObject() {
     if (pickableObject) {
         delete pickableObject;
         pickableObject = nullptr;
+        Setting::getInstance()->playSound("pick_drop");
         return true;
     }
     return false;

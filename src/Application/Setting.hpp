@@ -3,10 +3,14 @@
 #include "InputSupport.hpp"
 
 #include <unordered_map>
+#include <iostream>
 
 class Setting {
 private:
     std::unordered_map<InputSupport::Key, bool> cantUse;
+    std::unordered_map<std::string, Sound> listOfSounds;
+    std::unordered_map<std::string, Music> listOfMusics;
+    Music backgroundMusic;
     std::vector<Camera3D> cameras;
     InputSupport::Key moveUp;
     InputSupport::Key moveDown;
@@ -47,5 +51,9 @@ public:
     void toggleMute();
     Camera3D *getCamera();
     void setCurMap(int curMap);
+    int getCurMap();
     std::string getPathMap();
+    void playSound(std::string name);
+    void updateMusic();
+    Music getMusic(std::string name);
 };

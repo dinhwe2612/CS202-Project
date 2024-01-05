@@ -18,12 +18,13 @@ UiSceneNewGame::UiSceneNewGame() : UiScene() {
                     state = Scenes::MENU;
                     break;
                 } else if (i == 1) {
-                    
+                    tran = 1;
                     break;
                 } else if (i == 2) {
-                    
+                    tran = 2;
                     break;
                 } else if (i == 3) {
+                    Setting::getInstance()->setCurMap(curMap);
                     state = Scenes::GAME;
                     break;
                 }
@@ -32,6 +33,34 @@ UiSceneNewGame::UiSceneNewGame() : UiScene() {
     });
     for(int i = 0; i < buttons.size(); ++i) {
         colors[i] = WHITE;
+    }
+    curMap = 0;
+    colorScenes = { WHITE, { 255, 255, 255, 0 }, { 255, 255, 255, 0 } };
+    posScenes = { { 0, 0 }, { 510, 0 }, { 510, 0 } };
+}
+
+void UiSceneNewGame::transitionMap(int &tran) {
+    if (tran == 0) return;
+    if (curMap == 2 && tran == 2) return;
+    if (curMap == 0 && tran == 1) return;
+    if (tran == 2) {
+        colorScenes[curMap].a -= 5;
+        posScenes[curMap].x -= 10;
+        colorScenes[curMap + 1].a += 5;
+        posScenes[curMap + 1].x -= 10;
+        if (colorScenes[curMap].a == 0) {
+            tran = 0;
+            curMap = curMap + 1;
+        }
+    } else if (tran == 1) {
+        colorScenes[curMap].a -= 5;
+        posScenes[curMap].x += 10;
+        colorScenes[curMap - 1].a += 5;
+        posScenes[curMap - 1].x += 10;
+        if (colorScenes[curMap].a == 0) {
+            tran = 0;
+            curMap = curMap - 1;
+        }
     }
 }
 
@@ -44,13 +73,18 @@ void UiSceneNewGame::eventScene() {
         }
     }
     burgerGif->update();
+    transitionMap(tran);
 }
 
 void UiSceneNewGame::draw() {
     ClearBackground(BLACK);
     DrawTextureEx(resourcesManager->getTexture("backgroundSceneNewGame"), { 0, 0 }, 0, 1, WHITE);
     burgerGif->draw();
-    DrawTextureEx(resourcesManager->getTexture("map1"), { 0, 0 }, 0, 1, WHITE);
+    
+    for(int i = 0; i < 3; ++i) {
+        DrawTextureEx(resourcesManager->getTexture("map" + std::to_string(i + 1)), posScenes[i], 0, 1, colorScenes[i]);
+    }
+    
     DrawTextureEx(resourcesManager->getTexture("arrowBack"), { 0, 0 }, 0, 1, colors[0]);
     DrawTextureEx(resourcesManager->getTexture("arrowLeft"), { 0, 0 }, 0, 1, colors[1]);
     DrawTextureEx(resourcesManager->getTexture("arrowRight"), { 0, 0 }, 0, 1, colors[2]);

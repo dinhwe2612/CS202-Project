@@ -20,6 +20,7 @@ TaskManager::~TaskManager() {
 bool TaskManager::addTask() {
     if (numTasks >= maxTasks || remainingTimeAddNewTask() < timeAddNewTask) return false;
     tasks.push_back(std::make_shared<Task>(resourcesManager->getRandomTask(), durationTask));
+    std::cout << tasks.back()->getName() << std::endl;
     resourcesManager->resetTimer(getName());
     curTimeAddNewTask = 0;
     ++numTasks;

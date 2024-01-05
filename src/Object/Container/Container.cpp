@@ -1,7 +1,10 @@
 #include "Container.hpp"
 
 Container::Container() :Object3D() {
-    
+    if (Setting::getInstance()->getCurMap() == 2) {
+        setScale(0.15);
+        setPosition({ 0, 0.26, 0 });
+    }
 }
 
 Container::~Container() {

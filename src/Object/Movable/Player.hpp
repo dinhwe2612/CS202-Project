@@ -4,6 +4,7 @@
 #include "../Object.hpp"
 #include "../Other/InputObject.hpp"
 #include "../Object/Pickable/PickableObject.hpp"
+#include "../Application/Setting.hpp"
 
 #include <iostream>
 #include <unordered_map>

@@ -148,6 +148,7 @@ void ObjectManager::cut_cook() {
             CuttingBoard *cuttingBoard = dynamic_cast<CuttingBoard *>(object.get());
             if (CheckCollisionPointRec(player->pointInteract(), cuttingBoard->getCollisionBox())) {
                 if (cuttingBoard->isPlaceObjectOn()) {
+                    Setting::getInstance()->playSound("cut");
                     cuttingBoard->cut();
                 }
                 break;
@@ -157,6 +158,7 @@ void ObjectManager::cut_cook() {
             GasStove *gasStove = dynamic_cast<GasStove *>(object.get());
             if (CheckCollisionPointRec(player->pointInteract(), gasStove->getCollisionBox())) {
                 if (gasStove->isPlaceObjectOn()) {
+                    Setting::getInstance()->playSound("cook");
                     gasStove->cook();
                 }
                 break;
@@ -234,6 +236,7 @@ bool ObjectManager::submitTask() {
             TaskManager *taskManager = dynamic_cast<TaskManager *>(object.get());
             if (!CheckCollisionPointRec(player->pointInteract(), taskManager->getCollisionBox())) continue;
             if (taskManager->submitTask("task_" + player->pickableObject->getName())) {
+                Setting::getInstance()->playSound("submit");
                 player->dropObject();
                 return true;
             }
@@ -260,12 +263,12 @@ void ObjectManager::draw_tasks() {
 void ObjectManager::draw() {
     for (auto &object : objects) {
         if (object->isActivate()) object->draw();
-        if (object->getType() == ObjectType::Type::OBJECT3D || object->getType() == ObjectType::CONTAINER || object->getType() == ObjectType::TASKMANAGER) {
-            Object3D *object3d = dynamic_cast<Object3D*>(object.get());
-            if (object3d->isCollisionable() && !object3d->isActivate()) {
-                Rectangle rec = object3d->getCollisionBox();
-                DrawCube((Vector3){ rec.x + rec.width/2, 1, rec.y + rec.height/2 }, rec.width, 2, rec.height, { 255, 0, 0, 100 });
-            }
-        }
+        // if (object->getType() == ObjectType::Type::OBJECT3D || object->getType() == ObjectType::CONTAINER || object->getType() == ObjectType::TASKMANAGER) {
+        //     Object3D *object3d = dynamic_cast<Object3D*>(object.get());
+        //     if (object3d->isCollisionable() && !object3d->isActivate()) {
+        //         Rectangle rec = object3d->getCollisionBox();
+        //         DrawCube((Vector3){ rec.x + rec.width/2, 1, rec.y + rec.height/2 }, rec.width, 2, rec.height, { 255, 0, 0, 100 });
+        //     }
+        // }
     }
 }

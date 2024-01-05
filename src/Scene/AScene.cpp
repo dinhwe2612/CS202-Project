@@ -37,6 +37,7 @@ void AScene::triggerInputActions() {
     if (inputSp.isMousePressed()) {
         itKey = listOfkeys.find({ InputSupport::MOUSE_LEFT, InputSupport::PRESSED });
         if (itKey != listOfkeys.end()) {
+            Setting::getInstance()->playSound("click");
             itKey->second();
         }
     } else if (inputSp.isMouseDown()) {
@@ -70,11 +71,18 @@ void AScene::fade(bool out) {
     if (!isFade) {
         return;
     }
+    float scale = 1.0f;
+    Vector2 position;
+    Texture burg = resourcesManager->getTexture("BurgerDrop");
     for(int i = 0; i < maxFrames; ++i) {
+        scale += 0.03f;
+        position.x = 3000/2 - scale * burg.width / 2;
+        position.y = 1800/2 - scale * burg.height / 2;
         BeginDrawing();
         draw();
         if (out) {
             Color color = { 0, 0, 0, (int)(255 * ((float)i / maxFrames)) };
+            DrawTextureEx(burg, position, 0, scale, WHITE);
             DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), color);
         } else {
             Color color = { 0, 0, 0, (int)(255 * ((float)(maxFrames - i) / maxFrames)) };

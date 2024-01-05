@@ -3,6 +3,7 @@
 #include "Object.hpp"
 #include "../Application/InputSupport.hpp"
 #include "ResourcesManager/ResourcesManager.hpp"
+#include "../Application/Setting.hpp"
 
 #include <unordered_map> 
 #include <functional>
