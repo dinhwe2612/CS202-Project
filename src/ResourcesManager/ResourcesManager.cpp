@@ -53,6 +53,9 @@ ResourcesManager::ResourcesManager() : rng((std::chrono::steady_clock::now().tim
         {"lettuce_chopped", LoadModel("../resources/gltf/food_ingredient_lettuce_chopped.gltf")},
         {"lettuce_slice", LoadModel("../resources/gltf/food_ingredient_lettuce_slice.gltf")},
         {"ham", LoadModel("../resources/gltf/food_ingredient_ham.gltf")},
+        {"potato", LoadModel("../resources/gltf/food_ingredient_potato.gltf")},
+        {"potato_chopped", LoadModel("../resources/gltf/food_ingredient_potato_chopped.gltf")},
+        {"potato_mashed", LoadModel("../resources/gltf/food_ingredient_potato_mashed.gltf")},
         {"tomato", LoadModel("../resources/gltf/food_ingredient_tomato.gltf")},
         {"tomato_slice", LoadModel("../resources/gltf/food_ingredient_tomato_slice.gltf")},
         {"onion", LoadModel("../resources/gltf/food_ingredient_onion.gltf")},
@@ -90,6 +93,8 @@ ResourcesManager::ResourcesManager() : rng((std::chrono::steady_clock::now().tim
         {"carrot_chopped", "carrot_pieces"},
         {"steak", "steak_pieces"},
         {"steak_pieces", "burger_uncooked"},
+        {"potato", "potato_chopped"},
+        {"potato_chopped", "potato_mashed"},
     };
     listOfFries = {
         {"burger_uncooked", "burger_cooked"},
